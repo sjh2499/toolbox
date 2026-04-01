@@ -1,5 +1,54 @@
-# Vue 3 + Vite
+# 力太阳工具箱
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+一套在线实用工具集合，涵盖编码、加密、转换、生成等常用功能，开箱即用。
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## 包含工具
+
+- 📱 二维码生成
+- 📐 单位换算
+- 🔢 进制转换
+- 🎨 颜色工具（HEX / RGB / HSL 互转）
+- 📝 文字统计
+- 🔐 加密解密（AES / DES / Base64）
+- 🖼️ 图片压缩
+- 🎲 随机数生成
+- 🔑 密码生成
+- ⏳ 倒计时
+- 🧮 科学计算器
+- 🌍 世界时钟
+- ⚖️ BMI 计算
+- 🌐 IP 查询
+- { } JSON 格式化
+- 📋 Base64 编解码
+- 🔗 URL 编解码
+- #️⃣ 哈希生成（MD5 / SHA1 / SHA256）
+- 📄 Lorem Ipsum 生成
+- 🔍 正则测试
+- ⏰ 时间戳转换
+- 📡 摩尔斯电码编解码
+- 📸 图片转 Base64
+- 🔀 文本对比
+- 🀄 汉字转拼音
+
+## 技术栈
+
+- Vue 3
+- Vite
+- Vue Router
+
+## 本地开发
+
+```bash
+npm install
+npm run dev
+```
+
+## 构建
+
+```bash
+npm run build
+```
+
+## 版本
+
+v1.0
