@@ -32,7 +32,7 @@ export async function uploadFiles(taskToken, server, files) {
   for (const file of files) {
     formData.append('file', file)
   }
-  const res = await apiFetch(`${API_BASE}/upload`, {
+  const res = await apiFetch(`${server}/upload`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${taskToken}` },
     body: formData
@@ -43,7 +43,7 @@ export async function uploadFiles(taskToken, server, files) {
 // 3. 处理
 export async function processTask(taskToken, server, params = {}) {
   const body = { task: taskToken, ...params }
-  const res = await apiFetch(`${API_BASE}/process`, {
+  const res = await apiFetch(`${server}/process`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${taskToken}`,
@@ -56,7 +56,7 @@ export async function processTask(taskToken, server, params = {}) {
 
 // 4. 下载结果
 export async function downloadResult(taskToken, server) {
-  const res = await apiFetch(`${API_BASE}/download/${taskToken}`, {
+  const res = await apiFetch(`${server}/download/${taskToken}`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${taskToken}` }
   })
