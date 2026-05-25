@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <header class="header">
-      <h1>🛠️ 力太阳工具箱</h1>
-      <p class="subtitle">一个木函风格 · 轻量实用小工具集合</p>
+      <h1>力太阳工具箱</h1>
+      <p class="subtitle">一套在线实用工具集合，涵盖编码、加密、转换、生成等常用功能</p>
       <div class="search-box">
         <input v-model="keyword" placeholder="搜索工具…" />
       </div>
@@ -20,75 +20,16 @@
       </div>
     </div>
     <p v-if="!filtered.length" class="empty">没有找到匹配的工具</p>
-
-    <!-- Tool Modal -->
-    <div v-if="activeTool" class="modal-overlay" @click.self="activeTool = null">
-      <div class="modal">
-        <div class="modal-header">
-          <h2>{{ activeTool.icon }} {{ activeTool.name }}</h2>
-          <button class="close-btn" @click="activeTool = null">✕</button>
-        </div>
-        <div class="modal-body">
-          <component :is="toolComponents[activeTool.id]" />
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { tools } from '../tools'
-import QrCode from './QrCode.vue'
-import UnitConverter from './UnitConverter.vue'
-import BaseConverter from './BaseConverter.vue'
-import ColorTool from './ColorTool.vue'
-import TextCounter from './TextCounter.vue'
-import EncryptDecrypt from './EncryptDecrypt.vue'
-import ImgCompress from './ImgCompress.vue'
-import RandomNum from './RandomNum.vue'
-import PasswordGen from './PasswordGen.vue'
-import Countdown from './Countdown.vue'
-import Calculator from './Calculator.vue'
-import WorldClock from './WorldClock.vue'
-import BmiCalc from './BmiCalc.vue'
-import IpLookup from './IpLookup.vue'
-import JsonFormat from './JsonFormat.vue'
-import Base64Tool from './Base64Tool.vue'
-import UrlCode from './UrlCode.vue'
-import HashGen from './HashGen.vue'
-import LoremIpsum from './LoremIpsum.vue'
-import RegexTest from './RegexTest.vue'
-import Timestamp from './Timestamp.vue'
-import MorseCode from './MorseCode.vue'
-import ImgToBase64 from './ImgToBase64.vue'
-import TextDiff from './TextDiff.vue'
-import Pinyin from './Pinyin.vue'
-import PdfToWord from './PdfToWord.vue'
-import MergePdf from './MergePdf.vue'
-import SplitPdf from './SplitPdf.vue'
-import CompressPdf from './CompressPdf.vue'
-import PdfToJpg from './PdfToJpg.vue'
-import JpgToPdf from './JpgToPdf.vue'
-import ProtectPdf from './ProtectPdf.vue'
-import UnlockPdf from './UnlockPdf.vue'
 
-const toolComponents = {
-  'qr': QrCode, 'unit': UnitConverter, 'base': BaseConverter,
-  'color': ColorTool, 'text': TextCounter, 'encrypt': EncryptDecrypt,
-  'img-compress': ImgCompress, 'random': RandomNum, 'password': PasswordGen,
-  'countdown': Countdown, 'calc': Calculator, 'clock': WorldClock,
-  'bmi': BmiCalc, 'ip': IpLookup, 'json': JsonFormat,
-  'base64': Base64Tool, 'urlcode': UrlCode, 'hash': HashGen,
-  'lorem': LoremIpsum, 'regex': RegexTest, 'timestamp': Timestamp,
-  'morse': MorseCode, 'img-base64': ImgToBase64, 'diff': TextDiff,
-  'pinyin': Pinyin, 'pdf-word': PdfToWord, 'merge-pdf': MergePdf,
-  'split-pdf': SplitPdf, 'compress-pdf': CompressPdf, 'pdf-jpg': PdfToJpg,
-  'jpg-pdf': JpgToPdf, 'protect-pdf': ProtectPdf, 'unlock-pdf': UnlockPdf
-}
-
+const router = useRouter()
 const keyword = ref('')
-const activeTool = ref(null)
 const filtered = computed(() => {
   if (!keyword.value) return tools
   const kw = keyword.value.toLowerCase()
@@ -100,7 +41,7 @@ const filtered = computed(() => {
 })
 
 function openTool(t) {
-  activeTool.value = t
+  router.push(`/tool/${t.id}`)
 }
 </script>
 

@@ -37,7 +37,9 @@ const output = ref('')
 function run() {
   try {
     if (algo.value === 'base64') {
-      output.value = mode.value === 'encrypt' ? btoa(unescape(encodeURIComponent(input.value))) : decodeURIComponent(escape(atob(input.value)))
+      const utf8ToB64 = (s) => btoa(Array.from(new TextEncoder().encode(s), b => String.fromCharCode(b)).join(''))
+      const b64ToUtf8 = (s) => new TextDecoder().decode(new Uint8Array([...atob(s)].map(c => c.charCodeAt(0))))
+      output.value = mode.value === 'encrypt' ? utf8ToB64(input.value) : b64ToUtf8(input.value)
       return
     }
     if (!key.value) { output.value = '请输入密钥'; return }

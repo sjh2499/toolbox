@@ -33,16 +33,21 @@ const min = ref(1), max = ref(100), count = ref(1)
 const noRepeat = ref(false), sorted = ref(false), result = ref('')
 
 function generate() {
-  const nums = new Set()
   const range = max.value - min.value + 1
   if (noRepeat.value && count.value > range) { result.value = '范围不够，无法生成不重复的数'; return }
-  while (nums.size < count.value) {
-    const n = Math.floor(Math.random() * range) + min.value
-    if (!noRepeat.value || !nums.has(n)) nums.add(n)
+  if (noRepeat.value) {
+    const nums = new Set()
+    while (nums.size < count.value) {
+      nums.add(Math.floor(Math.random() * range) + min.value)
+    }
+    let arr = [...nums]
+    if (sorted.value) arr.sort((a, b) => a - b)
+    result.value = arr.join(', ')
+  } else {
+    const arr = Array.from({length: count.value}, () => Math.floor(Math.random() * range) + min.value)
+    if (sorted.value) arr.sort((a, b) => a - b)
+    result.value = arr.join(', ')
   }
-  let arr = [...nums]
-  if (sorted.value) arr.sort((a, b) => a - b)
-  result.value = arr.join(', ')
 }
 function copy(t) { if (t) navigator.clipboard?.writeText(t) }
 </script>

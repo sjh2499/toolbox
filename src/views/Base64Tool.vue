@@ -19,8 +19,18 @@
 import { ref } from 'vue'
 const input = ref(''), output = ref('')
 
-function encode() { output.value = btoa(unescape(encodeURIComponent(input.value))) }
-function decode() { try { output.value = decodeURIComponent(escape(atob(input.value))) } catch { output.value = '解码失败：不是有效的 Base64' } }
+function encode() {
+  const bytes = new TextEncoder().encode(input.value)
+  const binStr = Array.from(bytes, b => String.fromCharCode(b)).join('')
+  output.value = btoa(binStr)
+}
+function decode() {
+  try {
+    const binStr = atob(input.value)
+    const bytes = new Uint8Array([...binStr].map(c => c.charCodeAt(0)))
+    output.value = new TextDecoder().decode(bytes)
+  } catch { output.value = '解码失败：不是有效的 Base64' }
+}
 function copy(t) { if (t) navigator.clipboard?.writeText(t) }
 </script>
 

@@ -1,12 +1,6 @@
 <template>
-  <div id="app">
-    <Home />
-  </div>
+  <router-view />
 </template>
-
-<script setup>
-import Home from './views/Home.vue'
-</script>
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,7 +10,6 @@ body {
   color: #1d1d1f;
   min-height: 100vh;
 }
-#app { min-height: 100vh; }
 button { cursor: pointer; font-family: inherit; }
 input, textarea, select { font-family: inherit; }
 </style>

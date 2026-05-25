@@ -1,5 +1,5 @@
-const CACHE_NAME = 'toolbox-v1';
-const FILES = ['/index.html', '/manifest.json'];
+const CACHE_NAME = 'toolbox-v2';
+const FILES = ['/toolbox/', '/toolbox/index.html', '/toolbox/manifest.json'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
 });
@@ -13,5 +13,5 @@ self.addEventListener('fetch', e => {
       caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
     }
     return resp;
-  }).catch(() => caches.match('/index.html'))));
+  })));
 });

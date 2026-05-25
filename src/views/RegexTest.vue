@@ -21,16 +21,19 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 const pattern = ref(''), flags = ref('g'), text = ref(''), error = ref('')
 
+watch([pattern, flags], () => {
+  try { new RegExp(pattern.value, flags.value); error.value = '' } catch (e) { error.value = e.message }
+})
+
 const matches = computed(() => {
-  if (!pattern.value || !text.value) return []
-  try {
-    error.value = ''
-    const re = new RegExp(pattern.value, flags.value)
-    return text.value.match(re) || []
-  } catch (e) { error.value = e.message; return [] }
+  if (!pattern.value || !text.value || error.value) return []
+  const re = new RegExp(pattern.value, flags.value)
+  const result = text.value.match(re)
+  if (result === null) return []
+  return flags.value.includes('g') ? result : [result[0]]
 })
 function copy(t) { if (t) navigator.clipboard?.writeText(t) }
 </script>
