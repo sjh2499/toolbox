@@ -5,7 +5,7 @@
       <h2>🔒 加密 PDF</h2>
     </div>
     <div class="tool-body">
-      <p class="label">为 PDF 文件设置密码保护</p>
+      <p class="label">为 PDF 文件设置密码保护（生成自解密 HTML 文件）</p>
       <input type="file" accept=".pdf" @change="onFiles" ref="fileInput" />
       <div v-if="files.length" class="file-list">
         <div v-for="(f, i) in files" :key="i" class="file-item">
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="row">
-        <input type="text" v-model="password" placeholder="设置密码" />
+        <input type="password" v-model="password" placeholder="设置密码" />
       </div>
       <button @click="execute({ password })" class="btn" :disabled="loading || !files.length || !password">
         {{ loading ? '加密中...' : '加密 PDF' }}
@@ -31,7 +31,7 @@
 <script setup>
 import { ref } from 'vue'
 import { usePdfTool } from '../composables/usePdfTool.js'
-const { files, loading, error, result, fileInput, onFiles, removeFile, formatSize, execute, download } = usePdfTool({ tool: 'protect', outputExt: 'pdf' })
+const { files, loading, error, result, fileInput, onFiles, removeFile, formatSize, execute, download } = usePdfTool({ tool: 'protect', outputExt: 'html' })
 const password = ref('')
 </script>
 

@@ -27,7 +27,7 @@
 
 <script setup>
 import { usePdfTool } from '../composables/usePdfTool.js'
-const { files, loading, error, result, fileInput, onFiles, removeFile, formatSize, execute, download } = usePdfTool({ tool: 'pdfword', outputExt: 'docx' })
+const { files, loading, error, result, fileInput, onFiles, removeFile, formatSize, execute, download } = usePdfTool({ tool: 'pdfword', outputExt: 'doc' })
 </script>
 
 <style scoped>

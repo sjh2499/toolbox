@@ -55,14 +55,21 @@ function hslToRgb(h,s,l) {
 }
 
 function fromHex() {
-  try { const [r,g,b]=hexToRgb(hex.value); rgbStr.value=`rgb(${r}, ${g}, ${b})`; const [h,s,l]=rgbToHsl(r,g,b); hslStr.value=`hsl(${h}, ${s}%, ${l}%)` } catch {}
+  try {
+    const [r,g,b]=hexToRgb(hex.value)
+    if (isNaN(r) || isNaN(g) || isNaN(b)) return
+    rgbStr.value=`rgb(${r}, ${g}, ${b})`
+    const [h,s,l]=rgbToHsl(r,g,b)
+    if (!isNaN(h)) hslStr.value=`hsl(${h}, ${s}%, ${l}%)`
+  } catch {}
 }
 function fromRgb() {
   const m = rgbStr.value.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/)
   if(m){ const r=+m[1],g=+m[2],b=+m[3]; hex.value=rgbToHex(r,g,b); const [h,s,l]=rgbToHsl(r,g,b); hslStr.value=`hsl(${h}, ${s}%, ${l}%)` }
 }
 function fromHsl() {
-  const m = hslStr.value.match(/(\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?/)
+  let m = hslStr.value.match(/(\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?/)
+  if (!m) m = hslStr.value.match(/(\d+)\s+(\d+)%?\s+(\d+)%?/)
   if(m){ const [r,g,b]=hslToRgb(+m[1],+m[2],+m[3]); hex.value=rgbToHex(r,g,b); rgbStr.value=`rgb(${r}, ${g}, ${b})` }
 }
 function copy(t) { if(t) navigator.clipboard?.writeText(t) }

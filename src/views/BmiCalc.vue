@@ -37,9 +37,9 @@ function calc() {
   if (!height.value || !weight.value) return
   const v = weight.value / ((height.value / 100) ** 2)
   bmi.value = v.toFixed(1)
-  if (v < 18.5) { label.value = '偏瘦'; color.value = '#0071e3'; barWidth.value = v / 40 * 100 }
-  else if (v < 24) { label.value = '正常'; color.value = '#34c759'; barWidth.value = v / 40 * 100 }
-  else if (v < 28) { label.value = '偏胖'; color.value = '#ff9500'; barWidth.value = v / 40 * 100 }
+  if (v < 18.5) { label.value = '偏瘦'; color.value = '#0071e3'; barWidth.value = Math.min(100, v / 40 * 100) }
+  else if (v < 24) { label.value = '正常'; color.value = '#34c759'; barWidth.value = Math.min(100, v / 40 * 100) }
+  else if (v < 28) { label.value = '偏胖'; color.value = '#ff9500'; barWidth.value = Math.min(100, v / 40 * 100) }
   else { label.value = '肥胖'; color.value = '#ff3b30'; barWidth.value = Math.min(100, v / 40 * 100) }
 }
 </script>

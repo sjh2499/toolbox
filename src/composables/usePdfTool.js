@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { runTool, saveBlob } from '../services/api.js'
 
 export function usePdfTool(options = {}) {
@@ -7,10 +7,13 @@ export function usePdfTool(options = {}) {
   const error = ref('')
   const result = ref(null) // { blob, filename }
   const fileInput = ref(null)
+  let abortCtrl = null
 
   function onFiles(e) {
-    const list = e.target?.files || e
-    files.value = Array.from(list)
+    const fileList = e.target?.files
+    if (fileList) {
+      files.value = Array.from(fileList)
+    }
     error.value = ''
     result.value = null
   }
@@ -33,6 +36,7 @@ export function usePdfTool(options = {}) {
     loading.value = true
     error.value = ''
     result.value = null
+    abortCtrl = new AbortController()
     try {
       const blob = await runTool(options.tool, files.value, params)
       const ext = options.outputExt || 'pdf'
@@ -42,9 +46,11 @@ export function usePdfTool(options = {}) {
         filename: `${baseName}_converted.${ext}`
       }
     } catch (e) {
-      error.value = e.message || '处理失败，请检查 API Key 是否正确'
+      if (e.name === 'AbortError') return
+      error.value = e.message || '处理失败'
     } finally {
       loading.value = false
+      abortCtrl = null
     }
   }
 
@@ -53,6 +59,10 @@ export function usePdfTool(options = {}) {
       saveBlob(result.value.blob, result.value.filename)
     }
   }
+
+  onUnmounted(() => {
+    if (abortCtrl) abortCtrl.abort()
+  })
 
   return {
     files, loading, error, result, fileInput,

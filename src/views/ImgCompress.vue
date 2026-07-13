@@ -29,11 +29,10 @@ import { ref } from 'vue'
 const imgSrc = ref(''), result = ref('')
 const quality = ref(70), maxW = ref(1920)
 const origSize = ref(0), compSize = ref(0), reduction = ref(0)
-let origFile = null
 
 function onFile(e) {
   const f = e.target.files[0]; if (!f) return
-  origFile = f; origSize.value = f.size
+  origSize.value = f.size
   const r = new FileReader(); r.onload = () => imgSrc.value = r.result; r.readAsDataURL(f)
 }
 function compress() {
@@ -44,7 +43,8 @@ function compress() {
     c.width = w; c.height = h
     c.getContext('2d').drawImage(img, 0, 0, w, h)
     result.value = c.toDataURL('image/jpeg', quality.value / 100)
-    compSize.value = Math.round(result.value.length * 0.75)
+    const base64Part = result.value.includes(',') ? result.value.split(',')[1] : result.value
+    compSize.value = Math.round(base64Part.length * 0.75)
     reduction.value = origSize.value ? Math.round((1 - compSize.value / origSize.value) * 100) : 0
   }; img.src = imgSrc.value
 }

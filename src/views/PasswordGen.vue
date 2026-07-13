@@ -35,11 +35,16 @@ function gen() {
   if (symbols.value) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?'
   if (!chars) { pw.value = '请至少选一种字符'; return }
   const arr = new Uint32Array(length.value)
-  crypto.getRandomValues(arr)
+  if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+    crypto.getRandomValues(arr)
+  } else {
+    for (let i = 0; i < arr.length; i++) arr[i] = Math.floor(Math.random() * 0xFFFFFFFF)
+  }
   pw.value = Array.from(arr, v => chars[v % chars.length]).join('')
 }
 const strengthText = computed(() => {
   if (!pw.value) return ''
+  if (pw.value === '请至少选一种字符') return '⚠️ 未选择字符类型'
   const s = (upper.value?1:0)+(lower.value?1:0)+(digits.value?1:0)+(symbols.value?1:0)
   if (length.value >= 16 && s >= 3) return '💪 非常强'
   if (length.value >= 12 && s >= 2) return '✅ 强'

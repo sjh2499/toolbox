@@ -33,6 +33,7 @@ const min = ref(1), max = ref(100), count = ref(1)
 const noRepeat = ref(false), sorted = ref(false), result = ref('')
 
 function generate() {
+  if (min.value > max.value) { result.value = '最小值不能大于最大值'; return }
   const range = max.value - min.value + 1
   if (noRepeat.value && count.value > range) { result.value = '范围不够，无法生成不重复的数'; return }
   if (noRepeat.value) {

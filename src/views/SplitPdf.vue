@@ -41,13 +41,17 @@
 <script setup>
 import { ref } from 'vue'
 import { usePdfTool } from '../composables/usePdfTool.js'
-const { files, loading, error, result, fileInput, onFiles, removeFile, formatSize, execute, download } = usePdfTool({ tool: 'split', outputExt: 'zip' })
+const { files, loading, error, result, fileInput, onFiles, removeFile, formatSize, execute, download } = usePdfTool({ tool: 'split', outputExt: 'pdf' })
 
 const mode = ref('ranges')
 const ranges = ref('')
 const fixedPages = ref(1)
 
 function doSplit() {
+  if (mode.value === 'ranges' && !ranges.value.trim()) {
+    error.value = '请输入页码范围，如: 1-3,5,7-10'
+    return
+  }
   const params = { mode: mode.value }
   if (mode.value === 'ranges' && ranges.value) {
     params.ranges = ranges.value

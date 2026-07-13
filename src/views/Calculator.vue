@@ -15,7 +15,7 @@
 
 <script setup>
 import { ref } from 'vue'
-const display = ref(''), expr = ref('')
+const display = ref('')
 const buttons = ['C','(',')','÷','7','8','9','×','4','5','6','−','1','2','3','+','0','.','⌫','=']
 
 function btnClass(b) {

@@ -78,8 +78,8 @@ const unitMap = {
 const cat = ref('length')
 const val = ref(1)
 const units = computed(() => unitMap[cat.value])
-const from = ref(unitMap.length[2].key)
-const to = ref(unitMap.length[3].key)
+const from = ref(unitMap[cat.value][0].key)
+const to = ref(unitMap[cat.value][1].key)
 
 watch(cat, (c) => {
   from.value = unitMap[c][0].key

@@ -11,7 +11,7 @@
       </div>
       <div v-if="tab==='img2b64'">
         <input type="file" accept="image/*" @change="onFile" />
-        <div class="output" @click="copy(b64)" style="word-break:break-all;max-height:200px;overflow:auto">{{ b64 ? b64.substring(0,100)+'... ('+b64.length+' 字符)' : '' }}</div>
+        <div class="output" @click="copy(b64)" style="word-break:break-all;max-height:200px;overflow:auto">{{ b64 ? b64.split(',')[1]?.substring(0,100)+'... ('+b64.length+' 字符)' : '' }}</div>
         <button v-if="b64" @click="copy(b64)" class="btn secondary" style="margin-top:8px">复制完整 Base64</button>
       </div>
       <div v-else>

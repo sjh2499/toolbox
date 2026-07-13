@@ -25,9 +25,9 @@ const reverseMap = Object.fromEntries(Object.entries(map).map(([k,v]) => [v,k]))
 
 function run() {
   if (mode.value === 'encode') {
-    output.value = input.value.toUpperCase().split('').map(c => map[c] || '').join(' ')
+    output.value = input.value.toUpperCase().split('').map(c => map[c] || '?').join(' ')
   } else {
-    output.value = input.value.trim().split(' ').map(c => reverseMap[c] || (c === '/' ? ' ' : '?')).join('')
+    output.value = input.value.trim().split(/\s+/).map(c => reverseMap[c] || (c === '/' ? ' ' : '?')).join('')
   }
 }
 function copy(t) { if (t) navigator.clipboard?.writeText(t) }

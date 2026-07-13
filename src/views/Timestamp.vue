@@ -51,7 +51,9 @@ function tsToDate() {
   let v = parseInt(tsInput.value)
   if (isNaN(v)) { tsResult.value = '无效时间戳'; return }
   if (tsUnit.value === 's') v *= 1000
-  tsResult.value = new Date(v).toLocaleString('zh-CN', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })
+  const d = new Date(v)
+  if (isNaN(d.getTime())) { tsResult.value = '无效时间戳'; return }
+  tsResult.value = d.toLocaleString('zh-CN', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })
 }
 function dateToTs() {
   if (!dateInput.value) return

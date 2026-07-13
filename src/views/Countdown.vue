@@ -37,8 +37,12 @@ const display = computed(() => {
 
 function start() {
   if (running.value) return
-  if (remaining.value <= 0) remaining.value = (mins.value || 0) * 60 + (secs.value || 0)
-  if (remaining.value <= 0) return
+  if (remaining.value <= 0) {
+    const m = Math.max(0, mins.value || 0)
+    const s = Math.max(0, secs.value || 0)
+    remaining.value = m * 60 + s
+  }
+  if (remaining.value <= 0) { finished.value = true; return }
   finished.value = false; running.value = true
   timer = setInterval(() => { remaining.value--; if (remaining.value <= 0) { clearInterval(timer); running.value = false; finished.value = true } }, 1000)
 }

@@ -74,24 +74,4 @@ function openTool(t) {
 .name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
 .desc { font-size: 11px; color: #86868b; text-align: center; line-height: 1.3; }
 .empty { text-align: center; color: #86868b; margin-top: 40px; }
-.modal-overlay {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,.4); z-index: 100;
-  display: flex; align-items: center; justify-content: center;
-}
-.modal {
-  background: #fff; border-radius: 16px; width: 90%; max-width: 640px;
-  max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,.2);
-}
-.modal-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 20px; border-bottom: 1px solid #f0f0f0;
-}
-.modal-header h2 { font-size: 18px; }
-.close-btn {
-  background: none; border: none; font-size: 20px; color: #86868b;
-  padding: 4px 8px; border-radius: 6px;
-}
-.close-btn:hover { background: #f0f0f0; }
-.modal-body { padding: 20px; }
 </style>

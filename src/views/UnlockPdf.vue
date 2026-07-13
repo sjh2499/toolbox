@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="row">
-        <input type="text" v-model="password" placeholder="输入当前密码" />
+        <input type="password" v-model="password" placeholder="输入当前密码" />
       </div>
       <button @click="execute({ password })" class="btn" :disabled="loading || !files.length || !password">
         {{ loading ? '解锁中...' : '解锁 PDF' }}

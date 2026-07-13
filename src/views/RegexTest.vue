@@ -33,7 +33,7 @@ const matches = computed(() => {
   const re = new RegExp(pattern.value, flags.value)
   const result = text.value.match(re)
   if (result === null) return []
-  return flags.value.includes('g') ? result : [result[0]]
+  return flags.value.includes('g') ? result : [...result]
 })
 function copy(t) { if (t) navigator.clipboard?.writeText(t) }
 </script>

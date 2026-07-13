@@ -22,10 +22,13 @@
 import { ref } from 'vue'
 const input = ref(''), output = ref(''), error = ref('')
 
-function parse() { try { error.value = ''; return JSON.parse(input.value) } catch (e) { error.value = e.message; return null } }
-function format() { const d = parse(); if (d !== null) output.value = JSON.stringify(d, null, 2) }
-function compress() { const d = parse(); if (d !== null) output.value = JSON.stringify(d) }
-function sort() { const d = parse(); if (d !== null) output.value = JSON.stringify(sortKeys(d), null, 2) }
+function parse() {
+  try { error.value = ''; const d = JSON.parse(input.value); return { ok: true, data: d } }
+  catch (e) { error.value = e.message; return { ok: false, data: null } }
+}
+function format() { const r = parse(); if (r.ok) output.value = JSON.stringify(r.data, null, 2) }
+function compress() { const r = parse(); if (r.ok) output.value = JSON.stringify(r.data) }
+function sort() { const r = parse(); if (r.ok) output.value = JSON.stringify(sortKeys(r.data), null, 2) }
 function sortKeys(obj) {
   if (Array.isArray(obj)) return obj.map(sortKeys)
   if (obj && typeof obj === 'object') return Object.keys(obj).sort().reduce((o, k) => { o[k] = sortKeys(obj[k]); return o }, {})
