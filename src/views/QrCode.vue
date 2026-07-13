@@ -17,16 +17,17 @@
 
 <script setup>
 import { ref } from 'vue'
-import QRCode from 'qrcode'
+import qrcode from 'qrcode-generator'
 
 const text = ref('')
 const qrDataUrl = ref('')
 
-async function generate() {
+function generate() {
   if (!text.value) return
-  const canvas = document.createElement('canvas')
-  await QRCode.toCanvas(canvas, text.value, { width: 300, margin: 2 })
-  qrDataUrl.value = canvas.toDataURL('image/png')
+  const qr = qrcode(0, 'M')
+  qr.addData(text.value)
+  qr.make()
+  qrDataUrl.value = qr.createDataURL(4)
 }
 </script>
 

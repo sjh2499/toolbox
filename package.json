@@ -14,7 +14,7 @@
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^6.1.200",
     "pinyin-pro": "^3.28.0",
-    "qrcode": "^1.5.4",
+    "qrcode-generator": "^2.0.4",
     "vue": "^3.5.30",
     "vue-router": "^4.6.4"
   },
