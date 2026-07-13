@@ -24,7 +24,9 @@ const qrDataUrl = ref('')
 
 async function generate() {
   if (!text.value) return
-  qrDataUrl.value = await QRCode.toDataURL(text.value, { width: 300, margin: 2 })
+  const canvas = document.createElement('canvas')
+  await QRCode.toCanvas(canvas, text.value, { width: 300, margin: 2 })
+  qrDataUrl.value = canvas.toDataURL('image/png')
 }
 </script>
 

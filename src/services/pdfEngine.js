@@ -3,26 +3,10 @@
  * No external API key required — all operations run in the browser.
  */
 import { PDFDocument } from 'pdf-lib'
+import * as pdfjsLib from 'pdfjs-dist'
+import JSZip from 'jszip'
 
-// pdfjs-dist and JSZip are lazy-loaded (browser APIs needed)
-let _pdfjsLib = null
-let _JSZip = null
-
-async function getPdfjs() {
-  if (!_pdfjsLib) {
-    _pdfjsLib = await import('pdfjs-dist')
-    _pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'
-  }
-  return _pdfjsLib
-}
-
-async function getJSZip() {
-  if (!_JSZip) {
-    const mod = await import('jszip')
-    _JSZip = mod.default
-  }
-  return _JSZip
-}
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'
 
 // ── helpers ──
 
@@ -102,7 +86,6 @@ export async function compressPdf(files, params = {}) {
 }
 
 export async function pdfToJpg(files) {
-  const [pdfjsLib, JSZip] = await Promise.all([getPdfjs(), getJSZip()])
   const buf = await readAsArrayBuffer(files[0])
   const pdf = await pdfjsLib.getDocument({ data: buf }).promise
   const zip = new JSZip()
@@ -202,7 +185,6 @@ export async function unlockPdf(files, params = {}) {
   if (!password) throw new Error('请输入密码')
   const buf = await readAsArrayBuffer(files[0])
   try {
-    const pdfjsLib = await getPdfjs()
     const pdf = await pdfjsLib.getDocument({ data: buf, password }).promise
     const newDoc = await PDFDocument.create()
     for (let i = 1; i <= pdf.numPages; i++) {
@@ -226,7 +208,6 @@ export async function unlockPdf(files, params = {}) {
 }
 
 export async function pdfToWord(files) {
-  const pdfjsLib = await getPdfjs()
   const buf = await readAsArrayBuffer(files[0])
   const pdf = await pdfjsLib.getDocument({ data: buf }).promise
   const texts = []
