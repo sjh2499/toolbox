@@ -46,32 +46,40 @@ function openTool(t) {
 </script>
 
 <style scoped>
-.home { max-width: 960px; margin: 0 auto; padding: 40px 20px; }
-.header { text-align: center; margin-bottom: 40px; }
-.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
-.subtitle { color: #86868b; font-size: 14px; margin-bottom: 20px; }
+.home { max-width: 1200px; margin: 0 auto; padding: 48px 24px; }
+.header { text-align: center; margin-bottom: 48px; }
+.header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.subtitle { color: #86868b; font-size: 15px; margin-bottom: 24px; }
 .search-box input {
-  width: 100%; max-width: 400px; padding: 10px 16px;
-  border: 1px solid #d2d2d7; border-radius: 10px;
-  font-size: 15px; outline: none; background: #fff;
+  width: 100%; max-width: 480px; padding: 12px 18px;
+  border: 1px solid #d2d2d7; border-radius: 12px;
+  font-size: 16px; outline: none; background: #fff;
   transition: border-color .2s;
 }
 .search-box input:focus { border-color: #0071e3; }
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+}
+@media (max-width: 600px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .home { padding: 24px 16px; }
 }
 .card {
   display: flex; flex-direction: column; align-items: center;
-  padding: 20px 12px; background: #fff; border-radius: 14px;
+  padding: 28px 16px 24px; background: #fff; border-radius: 16px;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0,0,0,.06);
   transition: transform .15s, box-shadow .15s;
+  min-height: 130px; justify-content: center;
 }
-.card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.1); }
-.icon { font-size: 32px; margin-bottom: 8px; }
-.name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-.desc { font-size: 11px; color: #86868b; text-align: center; line-height: 1.3; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+.icon { font-size: 36px; margin-bottom: 10px; }
+.name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.desc { font-size: 12px; color: #86868b; text-align: center; line-height: 1.4; }
 .empty { text-align: center; color: #86868b; margin-top: 40px; }
 </style>

@@ -2,7 +2,7 @@
   "name": "力太阳工具箱",
   "short_name": "工具箱",
   "description": "多功能在线工具箱，34+实用工具",
-  "start_url": "/toolbox/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f5f5f5",
   "theme_color": "#4f46e5",
