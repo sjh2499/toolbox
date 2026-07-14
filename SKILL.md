@@ -1,6 +1,6 @@
 ---
 name: pikesun-design-system
-description: 不二的个人IP设计系统。做HTML页面、个人网站、教程页面、介绍页面、landing page等任何前端设计时自动触发。包含品牌DNA和多个场景子规范。
+description: 力太阳的个人IP设计系统。做HTML页面、个人网站、教程页面、介绍页面、landing page等任何前端设计时自动触发。包含品牌DNA和多个场景子规范。
 author: 力太阳 (sjh2499)
 license: CC BY-NC-SA 4.0
 repo: https://github.com/sjh2499/pikesun-design-system

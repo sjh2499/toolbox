@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>力太阳设计系统</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0071E3; --accent: #FF9500; --pop: #FF3B30;
+      --cream: #fefcf6; --ink: #1A1A2E; --ink-light: #4A4A5A; --ink-faint: #8A8A9A;
+      --card-bg: #fff; --border: rgba(26,26,26,.07);
+      --shadow: 0 4px 16px rgba(0,0,0,.08);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Noto Sans SC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+    .hero{padding:clamp(60px,10vh,100px) 1.5rem clamp(40px,6vh,60px);text-align:center}
+    .hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(2rem,5vw,3rem);font-weight:900}
+    .hero p{color:var(--ink-faint);max-width:600px;margin:12px auto 0;font-size:1.05rem}
+    .badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:.78rem;font-weight:600;margin:4px}
+    .badge-primary{background:rgba(0,113,227,.1);color:var(--primary)}
+    .badge-accent{background:rgba(255,149,0,.1);color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px);margin-bottom:clamp(40px,6vh,60px)}
+    @media(max-width:750px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card-bg);border-radius:16px;padding:clamp(24px,3vw,32px);box-shadow:0 1px 3px rgba(0,0,0,.04);text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s;display:block}
+    .card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.12)}
+    .card-icon{font-size:28px;margin-bottom:12px}
+    .card h3{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+    .card p{font-size:.82rem;color:var(--ink-faint)}
+    footer{text-align:center;padding:clamp(40px,6vh,60px) 1.5rem;color:var(--ink-faint);font-size:.78rem;border-top:1px solid var(--border)}
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <h1>🎨 力太阳设计系统</h1>
+  <p>一套给 AI 看的设计操作手册。把审美写成规则，限制 AI 的自由度 = 保证输出质量。</p>
+  <div style="margin-top:16px">
+    <span class="badge badge-primary">#0071E3</span>
+    <span class="badge badge-accent">#FF9500</span>
+    <span class="badge" style="background:rgba(255,59,48,.1);color:var(--pop)">#FF3B30</span>
+  </div>
+</section>
+
+<div class="container">
+  <div class="grid">
+    <a href="/demo-app.html" class="card">
+      <div class="card-icon">📱</div>
+      <h3>App 型 Demo</h3>
+      <p>个人仪表盘、功能导航、工具入口</p>
+    </a>
+    <a href="/demo-landing.html" class="card">
+      <div class="card-icon">🎪</div>
+      <h3>Landing Demo</h3>
+      <p>活动页、视觉冲击、深浅交替</p>
+    </a>
+    <a href="/demo-cards.html" class="card">
+      <div class="card-icon">📕</div>
+      <h3>卡片 Demo</h3>
+      <p>小红书图文、一键导出 PNG</p>
+    </a>
+    <a href="/demo-readme-tutorial.html" class="card">
+      <div class="card-icon">📖</div>
+      <h3>教程 Demo</h3>
+      <p>Design Skill 拆解教程</p>
+    </a>
+    <a href="/demo-layouts.html" class="card">
+      <div class="card-icon">📐</div>
+      <h3>布局展示</h3>
+      <p>16 种布局模式一览</p>
+    </a>
+    <a href="/components-preview.html" class="card">
+      <div class="card-icon">🧩</div>
+      <h3>组件库</h3>
+      <p>51 个组件全览</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  Forked from ESTHER不二 · 由 <strong>力太阳</strong> 定制 · <a href="https://github.com/sjh2499/toolbox/tree/esther-fork" style="color:var(--ink-faint)">GitHub</a>
+</footer>
+
+</body>
+</html>
