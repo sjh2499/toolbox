@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>力太阳 · 个人主页</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz@0,9..144,700;1,9..144,400&family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* === Brand DNA === */
+    :root {
+      --primary: #0071E3;
+      --primary-deep: #0059B3;
+      --accent: #FF9500;
+      --accent-soft: #FFF3E0;
+      --pop: #FF3B30;
+      --cream: #fefcf6;
+      --cream-dark: #faf6eb;
+      --ink: #1A1A2E;
+      --ink-light: #4A4A5A;
+      --ink-faint: #8A8A9A;
+      --card-bg: #fff;
+      --border: rgba(26,26,26,.07);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--accent); color: var(--ink); }
+
+    /* === Top accent bar === */
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--primary);
+      z-index: 9999;
+    }
+
+    /* === Hero === */
+    .hero {
+      padding: clamp(60px, 10vh, 100px) 1.5rem clamp(30px, 5vh, 60px);
+      text-align: center;
+    }
+
+    .hero-avatar {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #4da6ff);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0,113,227,.25);
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .hero .tagline {
+      font-size: 1rem;
+      color: var(--ink-faint);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .hero .accent-mark {
+      display: inline-block;
+      background: linear-gradient(transparent 55%, var(--accent) 55%);
+      padding: 0 4px;
+    }
+
+    /* === Stats row === */
+    .stats {
+      display: flex; justify-content: center; gap: clamp(32px, 6vw, 64px);
+      margin: clamp(20px, 3vh, 40px) 0;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .stat-label { font-size: 0.78rem; color: var(--ink-faint); margin-top: 2px; }
+
+    /* === Tool Grid === */
+    .section-title {
+      text-align: center;
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      margin: clamp(40px, 6vh, 70px) 0 clamp(24px, 3vh, 36px);
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 48px; height: 3px;
+      background: var(--accent);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    .container {
+      max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(16px, 2vw, 24px);
+    }
+    @media (max-width: 750px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .tool-grid { grid-template-columns: 1fr; } }
+
+    .tool-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: clamp(24px, 3vw, 36px);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      text-decoration: none;
+      color: inherit;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .tool-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    .tool-card.featured {
+      border: 2px solid var(--primary);
+    }
+    .tool-card.featured::before {
+      content: '✦ 核心工具';
+      position: absolute; top: 12px; right: 16px;
+      font-size: 0.7rem; color: var(--primary);
+      font-weight: 700;
+      font-family: 'Caveat', cursive;
+      font-size: 0.85rem;
+    }
+
+    .tool-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .tool-icon.blue   { background: rgba(0,113,227,.1); }
+    .tool-icon.orange { background: rgba(255,149,0,.1); }
+    .tool-icon.red    { background: rgba(255,59,48,.1); }
+    .tool-icon.green  { background: rgba(52,199,89,.1); }
+    .tool-icon.purple { background: rgba(175,82,222,.1); }
+
+    .tool-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .tool-card p {
+      font-size: 0.82rem; color: var(--ink-faint);
+      line-height: 1.4;
+    }
+    .tool-card .badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    /* === Quick links === */
+    .quick-links {
+      display: flex; justify-content: center; gap: 24px;
+      flex-wrap: wrap;
+      margin: clamp(40px, 6vh, 60px) 0;
+    }
+    .quick-link {
+      text-decoration: none;
+      color: var(--ink-light);
+      font-size: 0.85rem;
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all .2s;
+    }
+    .quick-link:hover {
+      background: rgba(0,113,227,.08);
+      color: var(--primary);
+    }
+
+    /* === Footer === */
+    footer {
+      text-align: center;
+      padding: clamp(40px, 6vh, 60px) 1.5rem;
+      color: var(--ink-faint);
+      font-size: 0.78rem;
+      border-top: 1px solid var(--border);
+      margin-top: clamp(40px, 6vh, 80px);
+    }
+    footer .heart { color: var(--pop); }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-avatar">⚡</div>
+    <h1>力太阳</h1>
+    <p class="tagline">
+      一个<span class="accent-mark">爱折腾</span>的开发者，
+      把常用工具整合在一起，让效率<span class="accent-mark">飞起来</span>
+    </p>
+    <div class="stats">
+      <div class="stat"><div class="stat-num">25+</div><div class="stat-label">在线工具</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">免费开源</div></div>
+      <div class="stat"><div class="stat-num">PWA</div><div class="stat-label">离线可用</div></div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <div class="container">
+    <div class="section-title">🛠️ 我的工具</div>
+    <div class="tool-grid">
+
+      <!-- Featured: Toolbox -->
+      <a href="https://sjh2499.github.io/toolbox/" class="tool-card featured" target="_blank">
+        <div class="tool-icon blue">🧰</div>
+        <h3>力太阳工具箱</h3>
+        <p>25+ 在线实用工具：二维码、加密解密、JSON格式化、颜色转换、时间戳、摩尔斯电码…</p>
+        <span class="badge">核心工具</span>
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/sjh2499" class="tool-card" target="_blank">
+        <div class="tool-icon purple">📦</div>
+        <h3>GitHub</h3>
+        <p>开源项目、代码仓库、协作开发</p>
+      </a>
+
+      <!-- More coming -->
+      <div class="tool-card">
+        <div class="tool-icon orange">🚧</div>
+        <h3>博客</h3>
+        <p>技术文章、踩坑记录、经验分享</p>
+        <span class="badge">即将上线</span>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon green">📖</div>
+        <h3>笔记</h3>
+        <p>学习笔记、知识库、速查表</p>
+        <span class="badge">即将上线</span>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon red">🎯</div>
+        <h3>项目展示</h3>
+        <p>作品集、Side Projects 一览</p>
+        <span class="badge">即将上线</span>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon blue">💡</div>
+        <h3>关于我</h3>
+        <p>联系方式、技能栈、个人介绍</p>
+        <span class="badge">即将上线</span>
+      </div>
+
+    </div>
+
+    <!-- Quick links -->
+    <div class="quick-links">
+      <a href="https://sjh2499.github.io/toolbox/" class="quick-link" target="_blank">🔧 工具箱</a>
+      <a href="https://github.com/sjh2499" class="quick-link" target="_blank">🐙 GitHub</a>
+      <a href="https://toolbox-nine-navy.vercel.app" class="quick-link" target="_blank">⚡ Vercel 镜像</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    Built with <span class="heart">♥</span> &nbsp;·&nbsp; Powered by <strong>力太阳</strong> &nbsp;·&nbsp; Design System by <a href="https://github.com/esthersjw/esther-design-system" target="_blank" style="color:var(--ink-faint)">ESTHER不二</a>
+  </footer>
+
+</body>
+</html>
