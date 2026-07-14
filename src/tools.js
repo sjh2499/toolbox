@@ -24,12 +24,4 @@ export const tools = [
   { id: 'img-base64', name: '图片转Base64', icon: '📸', desc: '图片与Base64互转' },
   { id: 'diff', name: '文本对比', icon: '🔀', desc: '对比两段文本差异' },
   { id: 'pinyin', name: '汉字转拼音', icon: '🀄', desc: '中文转拼音标注' },
-  { id: 'pdf-word', name: 'PDF 转 Word', icon: '📄', desc: 'PDF 转换为可编辑 Word' },
-  { id: 'merge-pdf', name: '合并 PDF', icon: '📑', desc: '多个 PDF 合并为一个' },
-  { id: 'split-pdf', name: '拆分 PDF', icon: '✂️', desc: '按页拆分 PDF 文件' },
-  { id: 'compress-pdf', name: '压缩 PDF', icon: '🗜️', desc: '减小 PDF 文件大小' },
-  { id: 'pdf-jpg', name: 'PDF 转 JPG', icon: '🖼️', desc: 'PDF 每页转为图片' },
-  { id: 'jpg-pdf', name: 'JPG 转 PDF', icon: '📸', desc: '图片合并为 PDF' },
-  { id: 'protect-pdf', name: '加密 PDF', icon: '🔒', desc: '为 PDF 设置密码' },
-  { id: 'unlock-pdf', name: '解锁 PDF', icon: '🔓', desc: '移除 PDF 密码保护' },
 ]

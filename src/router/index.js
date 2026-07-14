@@ -28,14 +28,6 @@ const componentMap = {
   'img-base64': () => import('../views/ImgToBase64.vue'),
   'diff': () => import('../views/TextDiff.vue'),
   'pinyin': () => import('../views/Pinyin.vue'),
-  'pdf-word': () => import('../views/PdfToWord.vue'),
-  'merge-pdf': () => import('../views/MergePdf.vue'),
-  'split-pdf': () => import('../views/SplitPdf.vue'),
-  'compress-pdf': () => import('../views/CompressPdf.vue'),
-  'pdf-jpg': () => import('../views/PdfToJpg.vue'),
-  'jpg-pdf': () => import('../views/JpgToPdf.vue'),
-  'protect-pdf': () => import('../views/ProtectPdf.vue'),
-  'unlock-pdf': () => import('../views/UnlockPdf.vue'),
 }
 
 const routes = [
