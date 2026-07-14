@@ -60,7 +60,7 @@ body (background:#f5f5f5)
 ### 红色 kicker（顶部标签）
 ```html
 <section style="text-align:center; margin-bottom:14px;">
-  <span style="font-size:13px; font-weight:bold; letter-spacing:5px; color:#E84A5F;">标签文字</span>
+  <span style="font-size:13px; font-weight:bold; letter-spacing:5px; color:#FF3B30;">标签文字</span>
 </section>
 ```
 
@@ -75,16 +75,16 @@ body (background:#f5f5f5)
 ### 引言金句（居中衬线）
 ```html
 <section style="text-align:center; margin-bottom:10px;">
-  <p style="margin:0; font-family:Georgia,'Songti SC',serif; font-size:21px; font-weight:900; line-height:1.9;">金句文字<br>第二行<span style="color:#2B7FD8;">蓝色关键词</span>。</p>
+  <p style="margin:0; font-family:Georgia,'Songti SC',serif; font-size:21px; font-weight:900; line-height:1.9;">金句文字<br>第二行<span style="color:#0071E3;">蓝色关键词</span>。</p>
 </section>
 ```
 
 ### 三色装饰条
 ```html
 <section style="text-align:center; margin-bottom:36px;">
-  <span style="display:inline-block; width:36px; height:4px; background:#2B7FD8; border-radius:2px;"></span>
-  <span style="display:inline-block; width:18px; height:4px; background:#F4D758; border-radius:2px; margin-left:5px;"></span>
-  <span style="display:inline-block; width:8px; height:4px; background:#E84A5F; border-radius:2px; margin-left:5px;"></span>
+  <span style="display:inline-block; width:36px; height:4px; background:#0071E3; border-radius:2px;"></span>
+  <span style="display:inline-block; width:18px; height:4px; background:#FF9500; border-radius:2px; margin-left:5px;"></span>
+  <span style="display:inline-block; width:8px; height:4px; background:#FF3B30; border-radius:2px; margin-left:5px;"></span>
 </section>
 ```
 
@@ -113,7 +113,7 @@ body (background:#f5f5f5)
   </section>
   <!-- 黄色短条 -->
   <section style="margin-bottom:22px;">
-    <span style="display:inline-block; width:56px; height:6px; background:#F4D758; border-radius:3px;"></span>
+    <span style="display:inline-block; width:56px; height:6px; background:#FF9500; border-radius:3px;"></span>
   </section>
   <!-- 正文内容 -->
   <p style="margin:0 0 18px; font-size:18px; line-height:2; color:#1A1A2E;">段落文字</p>
@@ -127,13 +127,13 @@ body (background:#f5f5f5)
     <span style="font-family:Georgia,'Songti SC',serif; font-style:italic; font-size:68px; font-weight:bold; color:rgba(43,127,216,0.14); line-height:1;">01</span>
   </section>
   <section style="margin-bottom:4px;">
-    <span style="font-size:13px; font-weight:bold; letter-spacing:4px; color:#2B7FD8;">STEP 1</span>
+    <span style="font-size:13px; font-weight:bold; letter-spacing:4px; color:#0071E3;">STEP 1</span>
   </section>
   <section style="margin-bottom:10px;">
     <span style="font-family:Georgia,'Songti SC',serif; font-size:27px; font-weight:900;">标题</span>
   </section>
   <section style="margin-bottom:22px;">
-    <span style="display:inline-block; width:56px; height:6px; background:#F4D758; border-radius:3px;"></span>
+    <span style="display:inline-block; width:56px; height:6px; background:#FF9500; border-radius:3px;"></span>
   </section>
   <!-- 内容 -->
 </section>
@@ -161,16 +161,16 @@ body (background:#f5f5f5)
 
 ### 荧光笔高亮（加粗文字）
 ```html
-<span style="background:linear-gradient(transparent 60%, #F4D758 60%); font-weight:bold; padding:0 2px;">高亮文字</span>
+<span style="background:linear-gradient(transparent 60%, #FF9500 60%); font-weight:bold; padding:0 2px;">高亮文字</span>
 ```
 每节 1-3 处，不贪多。对应源文档中 `**加粗**` 的文字。
 
 ### 三色分隔条（章节之间）
 ```html
 <section style="text-align:center; margin-bottom:56px;">
-  <span style="display:inline-block; width:36px; height:4px; background:#2B7FD8; border-radius:2px;"></span>
-  <span style="display:inline-block; width:18px; height:4px; background:#F4D758; border-radius:2px; margin-left:5px;"></span>
-  <span style="display:inline-block; width:8px; height:4px; background:#E84A5F; border-radius:2px; margin-left:5px;"></span>
+  <span style="display:inline-block; width:36px; height:4px; background:#0071E3; border-radius:2px;"></span>
+  <span style="display:inline-block; width:18px; height:4px; background:#FF9500; border-radius:2px; margin-left:5px;"></span>
+  <span style="display:inline-block; width:8px; height:4px; background:#FF3B30; border-radius:2px; margin-left:5px;"></span>
 </section>
 ```
 
@@ -181,9 +181,9 @@ body (background:#f5f5f5)
   <p style="margin:8px 0 6px; font-family:Georgia,'Songti SC',serif; font-size:21px; font-weight:900; line-height:1.8;">核心金句文字</p>
   <p style="margin:0 0 16px; font-size:14px; color:#8A8A9A;">副句 / 补充</p>
   <section style="text-align:center;">
-    <span style="display:inline-block; width:36px; height:4px; background:#2B7FD8; border-radius:2px;"></span>
-    <span style="display:inline-block; width:18px; height:4px; background:#F4D758; border-radius:2px; margin-left:5px;"></span>
-    <span style="display:inline-block; width:8px; height:4px; background:#E84A5F; border-radius:2px; margin-left:5px;"></span>
+    <span style="display:inline-block; width:36px; height:4px; background:#0071E3; border-radius:2px;"></span>
+    <span style="display:inline-block; width:18px; height:4px; background:#FF9500; border-radius:2px; margin-left:5px;"></span>
+    <span style="display:inline-block; width:8px; height:4px; background:#FF3B30; border-radius:2px; margin-left:5px;"></span>
   </section>
 </section>
 ```
@@ -192,7 +192,7 @@ body (background:#f5f5f5)
 
 ```html
 <section style="text-align:center; padding:20px 0 0;">
-  <p style="margin:0 0 4px; font-size:15px; font-weight:bold; color:#1A1A2E;">ESTHER不二</p>
+  <p style="margin:0 0 4px; font-size:15px; font-weight:bold; color:#1A1A2E;">力太阳</p>
   <p style="margin:0; font-size:13px; color:#8A8A9A; line-height:1.8;">▪️在AI时代认真生活的女生｜INTJ<br>▪️跟Agent搭档的第1年</p>
 </section>
 ```

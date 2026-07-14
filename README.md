@@ -16,7 +16,7 @@
 
 信息清晰、步骤明确、有节奏的单页科普/教程。
 
-🔗 [在线预览](https://esthersjw.github.io/cola-ob-sharing/cola-ob-sharing.html)
+🔗 [在线预览](https://sjh2499.github.io/cola-ob-sharing/cola-ob-sharing.html)
 
 ---
 
@@ -24,7 +24,7 @@
 
 把审美写成操作手册——从纠正AI到做出自己的Design Skill的完整过程。
 
-🔗 [在线预览](https://esthersjw.github.io/esther-design-system/demo-readme-tutorial.html)
+🔗 [在线预览](https://sjh2499.github.io/pikesun-design-system/demo-readme-tutorial.html)
 
 ---
 
@@ -32,7 +32,7 @@
 
 视觉冲击、深浅面板交替、强节奏感的活动邀请页。
 
-🔗 [在线预览](https://esthersjw.github.io/esther-design-system/demo-landing.html)
+🔗 [在线预览](https://sjh2499.github.io/pikesun-design-system/demo-landing.html)
 
 ---
 
@@ -40,7 +40,7 @@
 
 功能优先、交互感、信息密度高的应用型页面。
 
-🔗 [在线预览](https://esthersjw.github.io/esther-design-system/demo-app.html)
+🔗 [在线预览](https://sjh2499.github.io/pikesun-design-system/demo-app.html)
 
 ---
 
@@ -48,7 +48,7 @@
 
 3:4 比例、字大、手机可读、一键导出 PNG 的图文卡片。
 
-🔗 [在线预览](https://esthersjw.github.io/esther-design-system/demo-cards.html)
+🔗 [在线预览](https://sjh2499.github.io/pikesun-design-system/demo-cards.html)
 
 ---
 
@@ -56,7 +56,7 @@
 
 杂志编号风：全内联样式 + section 标签，复制粘贴进微信公众号编辑器即可。
 
-🔗 [在线预览](https://esthersjw.github.io/esther-design-system/assets/demo-wechat.html)
+🔗 [在线预览](https://sjh2499.github.io/pikesun-design-system/assets/demo-wechat.html)
 
 ---
 
@@ -64,7 +64,7 @@
 
 16种经过验证的布局模式一览。
 
-🔗 [在线预览](https://esthersjw.github.io/esther-design-system/demo-layouts.html)
+🔗 [在线预览](https://sjh2499.github.io/pikesun-design-system/demo-layouts.html)
 
 ---
 
@@ -72,7 +72,7 @@
 
 51个经过验证的可复用组件。
 
-🔗 [组件库预览](https://esthersjw.github.io/esther-design-system/components-preview.html)
+🔗 [组件库预览](https://sjh2499.github.io/pikesun-design-system/components-preview.html)
 
 ---
 
@@ -96,7 +96,7 @@ assets/template-*.html(起点 - 从模板改,不从零写)
 ## 文件结构
 
 ```
-esther-design-system/
+pikesun-design-system/
 ├── SKILL.md                    ← 7步工作流(大脑)
 ├── brand-dna.md                ← 品牌基因:颜色/字体/气质/禁忌(需配置)
 ├── assets/                     ← 模板骨架(起点)
@@ -142,9 +142,9 @@ AI 每次做设计必须按这个顺序走：
 
 | 颜色 | 色值 | 比例 |
 |------|------|------|
-| 主色 | `#2B7FD8` | 60% |
-| 强调色 | `#F4D758` | 30% |
-| 点缀色 | `#E84A5F` | 10% |
+| 主色 | `#0071E3` | 60% |
+| 强调色 | `#FF9500` | 30% |
+| 点缀色 | `#FF3B30` | 10% |
 
 ### 字体
 
@@ -186,7 +186,7 @@ AI 每次做设计必须按这个顺序走：
 
 1. Fork 或克隆本仓库
 2. 放入你的头像 `assets/avatar.jpg`
-3. （可选）打开 `brand-dna.md`，把默认品牌色替换成你自己的，并同步修改 `assets/template-*.html` 里 `:root` 的变量。注意：公众号模板（`template-wechat.html`）全部是内联样式，没有 CSS 变量，需要手动搜索替换色值。快捷方法：在所有模板文件中搜索 `#2B7FD8` 替换为你的主色，`#F4D758` 替换为你的强调色，`#E84A5F` 替换为你的点缀色
+3. （可选）打开 `brand-dna.md`，把默认品牌色替换成你自己的，并同步修改 `assets/template-*.html` 里 `:root` 的变量。注意：公众号模板（`template-wechat.html`）全部是内联样式，没有 CSS 变量，需要手动搜索替换色值。快捷方法：在所有模板文件中搜索 `#0071E3` 替换为你的主色，`#FF9500` 替换为你的强调色，`#FF3B30` 替换为你的点缀色
 4. 把 `assets/template-cards.html` 中的作者名替换成你自己的
 5. 把仓库链接发给你的 AI Agent，跟它说：
 
@@ -210,6 +210,6 @@ AI 每次做设计必须按这个顺序走：
 本仓库采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 协议。
 
 - ✅ 可自由使用、修改、分享
-- ✅ 必须署名：ESTHER不二 (esthersjw)
+- ✅ 必须署名：力太阳 (sjh2499)
 - ❌ 禁止商用
 - 🔄 修改后必须以相同协议分享
