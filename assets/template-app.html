@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PikeSun · 个人主页</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PikeSun Design System — 力太阳
+   Template: App / Dashboard / Personal Homepage
+   ============================================================ */
+
+:root {
+  --pks-primary: #0071E3;
+  --pks-primary-rgb: 0, 113, 227;
+  --pks-accent: #FF9500;
+  --pks-accent-rgb: 255, 149, 0;
+  --pks-pop: #FF3B30;
+  --pks-pop-rgb: 255, 59, 48;
+  --pks-ink: #1A1A2E;
+  --pks-ink-light: #4A4A5A;
+  --pks-ink-faint: #8A8A9A;
+  --pks-cream: #fefcf6;
+  --pks-card: #fff;
+
+  --pks-space-xs: 4px;
+  --pks-space-sm: 8px;
+  --pks-space-md: 16px;
+  --pks-space-lg: 24px;
+  --pks-space-xl: 32px;
+  --pks-space-2xl: 48px;
+  --pks-space-3xl: 64px;
+
+  --pks-font-display: "Fraunces", "Noto Serif SC", serif;
+  --pks-font-heading: "Noto Serif SC", "Fraunces", serif;
+  --pks-font-body: "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  --pks-font-hand: "Caveat", cursive;
+
+  --pks-radius-sm: 6px;
+  --pks-radius-md: 10px;
+  --pks-radius-lg: 16px;
+  --pks-radius-full: 999px;
+
+  --pks-shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --pks-shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --pks-shadow-lg: 0 12px 32px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.05);
+
+  --pks-content-max: 880px;
+  --pks-header-h: 56px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--pks-font-body);
+  color: var(--pks-ink);
+  background: var(--pks-cream);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ---- Top accent bar ---- */
+.accent-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7px;
+  z-index: 200;
+  background: linear-gradient(
+    to right,
+    var(--pks-primary) 0%, var(--pks-primary) calc(100% * 3/7),
+    var(--pks-accent) calc(100% * 3/7), var(--pks-accent) calc(100% * 5/7),
+    var(--pks-pop) calc(100% * 5/7), var(--pks-pop) 100%
+  );
+}
+
+/* ---- Sticky App Header ---- */
+.app-header {
+  position: sticky;
+  top: 7px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--pks-header-h);
+  padding: 0 var(--pks-space-xl);
+  background: rgba(254, 252, 246, 0.86);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--pks-space-md);
+}
+
+.header-brand {
+  font-family: var(--pks-font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--pks-ink);
+  text-decoration: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--pks-space-md);
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--pks-radius-full);
+  border: none;
+  background: transparent;
+  color: var(--pks-ink-light);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, color .15s;
+  position: relative;
+}
+
+.icon-btn:hover { background: rgba(0,0,0,.05); color: var(--pks-ink); }
+
+.icon-btn .badge-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pks-pop);
+  border: 2px solid var(--pks-cream);
+}
+
+.avatar-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pks-primary), var(--pks-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ---- Main content ---- */
+.main-content {
+  max-width: var(--pks-content-max);
+  margin: 0 auto;
+  padding: 0 var(--pks-space-xl) var(--pks-space-3xl);
+}
+
+/* ---- Hero / Profile ---- */
+.profile-hero {
+  text-align: center;
+  padding: var(--pks-space-2xl) 0 var(--pks-space-xl);
+}
+
+.profile-avatar-lg {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pks-primary), var(--pks-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--pks-space-lg);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(var(--pks-primary-rgb), 0.25);
+}
+
+.profile-name {
+  font-family: var(--pks-font-heading);
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--pks-ink);
+  margin-bottom: var(--pks-space-xs);
+}
+
+.profile-tagline {
+  font-size: 0.95rem;
+  color: var(--pks-ink-faint);
+  margin-bottom: var(--pks-space-lg);
+  font-family: var(--pks-font-hand);
+  font-size: 1.15rem;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--pks-space-2xl);
+}
+
+.profile-stat {
+  text-align: center;
+}
+
+.profile-stat-val {
+  font-family: var(--pks-font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pks-ink);
+}
+
+.profile-stat-lbl {
+  font-size: 0.75rem;
+  color: var(--pks-ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Tool Grid ---- */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--pks-space-lg);
+}
+
+.section-header h2 {
+  font-family: var(--pks-font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.section-header a {
+  font-size: 0.85rem;
+  color: var(--pks-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.section-header a:hover { color: var(--pks-accent); }
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--pks-space-md);
+}
+
+.tool-card {
+  background: var(--pks-card);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--pks-radius-md);
+  padding: var(--pks-space-xl) var(--pks-space-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .18s, transform .18s, border-color .18s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: var(--pks-shadow-sm);
+}
+
+.tool-card:hover {
+  box-shadow: var(--pks-shadow-md);
+  transform: translateY(-2px);
+}
+
+.tool-card.featured {
+  border-color: var(--pks-accent);
+  border-width: 2px;
+  margin: -1px;
+}
+
+.tool-card.featured::after {
+  content: "核心工具";
+  position: absolute;
+  top: var(--pks-space-sm);
+  right: var(--pks-space-sm);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--pks-accent);
+  padding: 2px 10px;
+  border-radius: var(--pks-radius-full);
+  letter-spacing: 0.04em;
+}
+
+.tool-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--pks-radius-md);
+  background: rgba(var(--pks-primary-rgb), 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: var(--pks-space-md);
+  flex-shrink: 0;
+}
+
+.tool-card.featured .tool-icon {
+  background: rgba(var(--pks-accent-rgb), 0.12);
+}
+
+.tool-card h3 {
+  font-family: var(--pks-font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--pks-space-xs);
+  color: var(--pks-ink);
+}
+
+.tool-card p {
+  font-size: 0.82rem;
+  color: var(--pks-ink-faint);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.tool-badge {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: var(--pks-space-sm);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: var(--pks-radius-full);
+  background: rgba(var(--pks-primary-rgb), 0.08);
+  color: var(--pks-primary);
+}
+
+/* ---- Quick links ---- */
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pks-space-sm);
+  margin-top: var(--pks-space-xl);
+}
+
+.pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pks-space-xs);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--pks-ink-light);
+  background: var(--pks-card);
+  border: 1px solid rgba(0,0,0,.08);
+  padding: var(--pks-space-sm) var(--pks-space-lg);
+  border-radius: var(--pks-radius-full);
+  text-decoration: none;
+  transition: all .15s;
+}
+
+.pill-link:hover {
+  color: var(--pks-primary);
+  border-color: var(--pks-primary);
+  background: rgba(var(--pks-primary-rgb), 0.04);
+}
+
+/* ---- Footer ---- */
+.app-footer {
+  text-align: center;
+  padding: var(--pks-space-xl);
+  color: var(--pks-ink-faint);
+  font-size: 0.78rem;
+  border-top: 1px solid rgba(0,0,0,.05);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 750px) {
+  html { font-size: 16px; }
+
+  .tool-grid { grid-template-columns: repeat(2, 1fr); }
+  .main-content { padding: 0 var(--pks-space-lg) var(--pks-space-2xl); }
+  .app-header { padding: 0 var(--pks-space-lg); }
+  .profile-hero { padding: var(--pks-space-xl) 0; }
+}
+
+@media (max-width: 480px) {
+  html { font-size: 15px; }
+
+  .tool-grid { grid-template-columns: 1fr; }
+  .main-content { padding: 0 var(--pks-space-md) var(--pks-space-xl); }
+  .app-header { padding: 0 var(--pks-space-md); }
+
+  .profile-stats { gap: var(--pks-space-xl); }
+  .profile-name { font-size: 1.4rem; }
+  .profile-avatar-lg { width: 68px; height: 68px; font-size: 1.5rem; }
+
+  .quick-links { justify-content: center; }
+  .pill-link { font-size: 0.75rem; padding: var(--pks-space-xs) var(--pks-space-md); }
+
+  .header-brand { font-size: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top accent bar -->
+<div class="accent-bar" aria-hidden="true"></div>
+
+<!-- ============ STICKY APP HEADER ============ -->
+<header class="app-header">
+  <div class="header-left">
+    <a href="#" class="header-brand">力太阳</a>
+  </div>
+  <div class="header-right">
+    <button class="icon-btn" aria-label="搜索" title="搜索">&#128269;</button>
+    <button class="icon-btn" aria-label="通知" title="通知">
+      &#128276;
+      <span class="badge-dot"></span>
+    </button>
+    <button class="icon-btn" aria-label="设置" title="设置">&#9881;</button>
+    <div class="avatar-circle" title="用户头像">力</div>
+  </div>
+</header>
+
+<!-- ============ MAIN CONTENT ============ -->
+<main class="main-content">
+
+  <!-- Profile / Hero -->
+  <section class="profile-hero">
+    <div class="profile-avatar-lg" aria-hidden="true">力</div>
+    <h1 class="profile-name">力太阳</h1>
+    <p class="profile-tagline">Building tools for creators.</p>
+    <div class="profile-stats">
+      <div class="profile-stat">
+        <div class="profile-stat-val">47</div>
+        <div class="profile-stat-lbl">项目</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-val">1.2K</div>
+        <div class="profile-stat-lbl">关注</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-val">89</div>
+        <div class="profile-stat-lbl">工具</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tool Grid -->
+  <section>
+    <div class="section-header">
+      <h2>常用工具</h2>
+      <a href="#">查看全部 &rarr;</a>
+    </div>
+    <div class="tool-grid">
+
+      <!-- Featured card -->
+      <a href="#" class="tool-card featured">
+        <div class="tool-icon">&#9733;</div>
+        <h3>设计令牌生成器</h3>
+        <p>从品牌色一键生成完整的 CSS 变量文件与 Figma 样式。</p>
+      </a>
+
+      <a href="#" class="tool-card">
+        <div class="tool-icon">&#128196;</div>
+        <h3>模板浏览器</h3>
+        <p>浏览、预览并下载所有 PikeSun 页面模板。</p>
+        <span class="tool-badge">New</span>
+      </a>
+
+      <a href="#" class="tool-card">
+        <div class="tool-icon">&#128200;</div>
+        <h3>数据分析</h3>
+        <p>可视化你的项目使用统计与性能指标。</p>
+      </a>
+
+      <a href="#" class="tool-card">
+        <div class="tool-icon">&#9998;</div>
+        <h3>Markdown 编辑器</h3>
+        <p>实时预览的 Markdown 写作工具，支持 PikeSun 样式导出。</p>
+      </a>
+
+      <a href="#" class="tool-card">
+        <div class="tool-icon">&#128247;</div>
+        <h3>社交卡片制作</h3>
+        <p>快速生成小红书风格的图文卡片，一键导出图片。</p>
+      </a>
+
+      <a href="#" class="tool-card">
+        <div class="tool-icon">&#9881;</div>
+        <h3>系统设置</h3>
+        <p>管理账户、团队与项目偏好配置。</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <nav class="quick-links" aria-label="快捷链接">
+    <a href="#" class="pill-link">&#9733; 收藏夹</a>
+    <a href="#" class="pill-link">&#128197; 最近使用</a>
+    <a href="#" class="pill-link">&#128101; 团队空间</a>
+    <a href="#" class="pill-link">&#128214; 文档中心</a>
+    <a href="#" class="pill-link">&#128172; 反馈建议</a>
+    <a href="#" class="pill-link">&#128309; 更新日志</a>
+  </nav>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="app-footer">
+  <p>PikeSun Design System &copy; 2026 · 力太阳</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PikeSun 社交卡片 · 力太阳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+/* ============================================================
+   PikeSun Design System — 力太阳
+   Template: Social Media Image Cards (小红书 style)
+   ============================================================ */
+
+:root {
+  --pks-primary: #0071E3;
+  --pks-primary-rgb: 0, 113, 227;
+  --pks-accent: #FF9500;
+  --pks-accent-rgb: 255, 149, 0;
+  --pks-pop: #FF3B30;
+  --pks-pop-rgb: 255, 59, 48;
+  --pks-ink: #1A1A2E;
+  --pks-ink-light: #4A4A5A;
+  --pks-ink-faint: #8A8A9A;
+  --pks-cream: #fefcf6;
+  --pks-card: #fff;
+
+  --pks-font-display: "Fraunces", "Noto Serif SC", serif;
+  --pks-font-heading: "Noto Serif SC", "Fraunces", serif;
+  --pks-font-body: "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  --pks-font-hand: "Caveat", cursive;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--pks-font-body);
+  background: #e8e6df;
+  color: var(--pks-ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+}
+
+/* ---- Toolbar ---- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.toolbar h1 {
+  font-family: var(--pks-font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--pks-ink);
+  margin-right: 16px;
+}
+
+.toolbar button {
+  font-family: var(--pks-font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: background .15s, transform .12s, box-shadow .15s;
+}
+
+.toolbar button:active { transform: scale(.97); }
+
+.btn-nav {
+  background: var(--pks-card);
+  color: var(--pks-ink);
+  border: 1px solid rgba(0,0,0,.1) !important;
+}
+.btn-nav:hover { background: rgba(0,0,0,.04); }
+
+.btn-export {
+  background: var(--pks-primary);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(var(--pks-primary-rgb), .30);
+}
+.btn-export:hover { background: var(--pks-accent); box-shadow: 0 6px 18px rgba(var(--pks-accent-rgb), .30); }
+
+.card-indicator {
+  font-size: 0.9rem;
+  color: var(--pks-ink-faint);
+  font-weight: 500;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* ---- Card container (3:4 aspect ratio) ---- */
+.card-stage {
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 3 / 4;
+  position: relative;
+  box-shadow: 0 16px 48px rgba(0,0,0,.15), 0 4px 12px rgba(0,0,0,.08);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.card-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 48px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease;
+}
+
+.card-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================================================
+   CARD STYLE 1 — Title Card
+   ============================================================ */
+.card-title {
+  background: linear-gradient(160deg, var(--pks-primary) 0%, #0055b3 100%);
+  color: #fff;
+}
+
+.card-title .ct-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: .75;
+  margin-bottom: 24px;
+}
+
+.card-title .ct-heading {
+  font-family: var(--pks-font-heading);
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.card-title .ct-sub {
+  font-size: 1.15rem;
+  opacity: .85;
+  line-height: 1.55;
+  max-width: 380px;
+}
+
+.card-title .ct-footer {
+  position: absolute;
+  bottom: 48px;
+  font-family: var(--pks-font-display);
+  font-size: 1rem;
+  opacity: .6;
+}
+
+/* ============================================================
+   CARD STYLE 2 — Quote Card
+   ============================================================ */
+.card-quote {
+  background: var(--pks-cream);
+}
+
+.card-quote .cq-mark {
+  font-family: var(--pks-font-display);
+  font-size: 5rem;
+  color: var(--pks-accent);
+  line-height: 1;
+  margin-bottom: -10px;
+}
+
+.card-quote .cq-text {
+  font-family: var(--pks-font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--pks-ink);
+  max-width: 420px;
+  margin-bottom: 28px;
+}
+
+.card-quote .cq-author {
+  font-family: var(--pks-font-hand);
+  font-size: 1.5rem;
+  color: var(--pks-ink-faint);
+}
+
+.card-quote .cq-source {
+  font-size: 0.85rem;
+  color: var(--pks-ink-faint);
+  margin-top: 6px;
+}
+
+/* ============================================================
+   CARD STYLE 3 — List Card
+   ============================================================ */
+.card-list {
+  background: var(--pks-card);
+  justify-content: flex-start;
+  padding-top: 60px;
+  text-align: left;
+  align-items: stretch;
+}
+
+.card-list .cl-heading {
+  font-family: var(--pks-font-heading);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--pks-ink);
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.card-list .cl-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card-list .cl-items li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--pks-ink-light);
+  line-height: 1.45;
+}
+
+.card-list .cl-num {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--pks-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* ============================================================
+   CARD STYLE 4 — Stat Card
+   ============================================================ */
+.card-stat {
+  background: var(--pks-ink);
+  color: #fff;
+}
+
+.card-stat .cs-label {
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: .55;
+  margin-bottom: 16px;
+}
+
+.card-stat .cs-big {
+  font-family: var(--pks-font-display);
+  font-size: 5.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pks-accent);
+  margin-bottom: 12px;
+}
+
+.card-stat .cs-unit {
+  font-family: var(--pks-font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.card-stat .cs-note {
+  font-size: 1rem;
+  opacity: .6;
+  max-width: 320px;
+  line-height: 1.55;
+}
+
+/* ============================================================
+   CARD STYLE 5 — Image / Decorative Card
+   ============================================================ */
+.card-deco {
+  background: linear-gradient(150deg, #fff5e8 0%, #fefcf6 40%, #e8f0fe 100%);
+  overflow: hidden;
+}
+
+.card-deco .cd-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: .12;
+}
+
+.card-deco .cd-shape-1 {
+  width: 300px;
+  height: 300px;
+  background: var(--pks-primary);
+  top: -60px;
+  right: -80px;
+}
+
+.card-deco .cd-shape-2 {
+  width: 200px;
+  height: 200px;
+  background: var(--pks-accent);
+  bottom: -40px;
+  left: -50px;
+}
+
+.card-deco .cd-shape-3 {
+  width: 100px;
+  height: 100px;
+  background: var(--pks-pop);
+  top: 50%;
+  right: 30px;
+}
+
+.card-deco .cd-content {
+  position: relative;
+  z-index: 1;
+}
+
+.card-deco .cd-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.card-deco .cd-heading {
+  font-family: var(--pks-font-heading);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--pks-ink);
+  margin-bottom: 12px;
+}
+
+.card-deco .cd-desc {
+  font-size: 1.1rem;
+  color: var(--pks-ink-light);
+  max-width: 360px;
+  line-height: 1.55;
+}
+
+.card-deco .cd-tag {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--pks-accent);
+  padding: 8px 20px;
+  border-radius: 999px;
+}
+
+/* ============================================================
+   CARD STYLE 6 — Minimal / Brand Card
+   ============================================================ */
+.card-brand {
+  background: var(--pks-card);
+  justify-content: center;
+  gap: 12px;
+}
+
+.card-brand .cb-logo {
+  font-family: var(--pks-font-display);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--pks-ink);
+}
+
+.card-brand .cb-logo span {
+  font-family: var(--pks-font-heading);
+  color: var(--pks-primary);
+}
+
+.card-brand .cb-line {
+  width: 48px;
+  height: 3px;
+  background: var(--pks-accent);
+  border-radius: 2px;
+  margin: 8px 0;
+}
+
+.card-brand .cb-tagline {
+  font-size: 1rem;
+  color: var(--pks-ink-faint);
+  font-family: var(--pks-font-hand);
+  font-size: 1.3rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  body { padding: 20px 12px 40px; }
+  .card-stage { max-width: 100%; }
+
+  .card-slide { padding: 40px 28px; }
+
+  .card-title .ct-heading { font-size: 2.2rem; }
+  .card-quote .cq-text { font-size: 1.3rem; }
+  .card-list .cl-heading { font-size: 1.5rem; }
+  .card-stat .cs-big { font-size: 4rem; }
+  .card-deco .cd-heading { font-size: 1.6rem; }
+  .card-brand .cb-logo { font-size: 2.5rem; }
+}
+
+@media (max-width: 400px) {
+  .card-slide { padding: 28px 18px; }
+  .card-title .ct-heading { font-size: 1.7rem; }
+  .card-quote .cq-text { font-size: 1.1rem; }
+  .card-list .cl-items li { font-size: 1rem; }
+  .card-stat .cs-big { font-size: 3.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <h1>力太阳 · 社交卡片</h1>
+  <button class="btn-nav" id="btnPrev" title="上一张">&larr; 上一张</button>
+  <span class="card-indicator" id="cardIndex">1 / 6</span>
+  <button class="btn-nav" id="btnNext" title="下一张">下一张 &rarr;</button>
+  <button class="btn-export" id="btnExport" title="导出当前卡片为图片">&#128247; 导出图片</button>
+</div>
+
+<!-- Card stage with 3:4 aspect ratio -->
+<div class="card-stage" id="cardStage">
+
+  <!-- Card 1: Title -->
+  <div class="card-slide card-title active" data-card="1">
+    <div class="ct-eyebrow">Design System</div>
+    <div class="ct-heading">构建你的设计语言</div>
+    <div class="ct-sub">从色彩到组件，PikeSun 为中文 Web 提供开箱即用的视觉一致性。</div>
+    <div class="ct-footer">力太阳</div>
+  </div>
+
+  <!-- Card 2: Quote -->
+  <div class="card-slide card-quote" data-card="2">
+    <div class="cq-mark">&ldquo;</div>
+    <div class="cq-text">好的设计不是关于它看起来怎样，而是关于它如何工作。</div>
+    <div class="cq-author">—— PikeSun 团队</div>
+    <div class="cq-source">设计哲学 · 第一条原则</div>
+  </div>
+
+  <!-- Card 3: List -->
+  <div class="card-slide card-list" data-card="3">
+    <div class="cl-heading">设计系统的五个要素</div>
+    <ol class="cl-items">
+      <li><span class="cl-num">1</span> 统一的色彩语义</li>
+      <li><span class="cl-num">2</span> 清晰的字体层级</li>
+      <li><span class="cl-num">3</span> 可组合的组件库</li>
+      <li><span class="cl-num">4</span> 响应式的间距体系</li>
+      <li><span class="cl-num">5</span> 可访问的对比度标准</li>
+    </ol>
+  </div>
+
+  <!-- Card 4: Stat -->
+  <div class="card-slide card-stat" data-card="4">
+    <div class="cs-label">GitHub 开源数据</div>
+    <div class="cs-big">12,000</div>
+    <div class="cs-unit">Stars</div>
+    <div class="cs-note">来自全球中文开发者的信任——PikeSun 已成为最受欢迎的中文设计系统之一。</div>
+  </div>
+
+  <!-- Card 5: Decorative / Image -->
+  <div class="card-slide card-deco" data-card="5">
+    <div class="cd-shape cd-shape-1"></div>
+    <div class="cd-shape cd-shape-2"></div>
+    <div class="cd-shape cd-shape-3"></div>
+    <div class="cd-content">
+      <div class="cd-icon">&#127912;</div>
+      <div class="cd-heading">温暖即是力量</div>
+      <div class="cd-desc">奶油基底搭配克制蓝橙，让专业感与亲和力并存。设计不该是冷冰冰的灰度。</div>
+      <span class="cd-tag">PikeSun 2.0</span>
+    </div>
+  </div>
+
+  <!-- Card 6: Brand / Minimal -->
+  <div class="card-slide card-brand" data-card="6">
+    <div class="cb-logo"><span>力</span>太阳</div>
+    <div class="cb-line"></div>
+    <div class="cb-tagline">PikeSun Design System</div>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   Card Navigation & Export
+   ============================================================ */
+
+(function () {
+  var slides = document.querySelectorAll('.card-slide');
+  var total = slides.length;
+  var current = 0;
+
+  var stageEl = document.getElementById('cardStage');
+  var indexEl = document.getElementById('cardIndex');
+  var btnPrev = document.getElementById('btnPrev');
+  var btnNext = document.getElementById('btnNext');
+  var btnExport = document.getElementById('btnExport');
+
+  function showCard(index) {
+    if (index < 0 || index >= total) return;
+    slides[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    indexEl.textContent = (current + 1) + ' / ' + total;
+  }
+
+  btnPrev.addEventListener('click', function () {
+    showCard(current === 0 ? total - 1 : current - 1);
+  });
+
+  btnNext.addEventListener('click', function () {
+    showCard(current === total - 1 ? 0 : current + 1);
+  });
+
+  /* Keyboard navigation */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); showCard(current === 0 ? total - 1 : current - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); showCard(current === total - 1 ? 0 : current + 1); }
+  });
+
+  /* Touch swipe */
+  var touchStartX = 0;
+  stageEl.addEventListener('touchstart', function (e) {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  stageEl.addEventListener('touchend', function (e) {
+    var diff = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(diff) > 60) {
+      if (diff < 0) showCard(current === total - 1 ? 0 : current + 1);
+      else          showCard(current === 0 ? total - 1 : current - 1);
+    }
+  });
+
+  /* Export with html2canvas */
+  btnExport.addEventListener('click', function () {
+    var activeSlide = slides[current];
+    var origText = btnExport.textContent;
+    btnExport.textContent = '导出中...';
+    btnExport.disabled = true;
+
+    html2canvas(activeSlide, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: null
+    }).then(function (canvas) {
+      var link = document.createElement('a');
+      link.download = 'pikesun-card-' + (current + 1) + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      btnExport.textContent = origText;
+      btnExport.disabled = false;
+    }).catch(function (err) {
+      console.error('导出失败:', err);
+      alert('导出图片失败，请检查 html2canvas CDN 是否加载成功。');
+      btnExport.textContent = origText;
+      btnExport.disabled = false;
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

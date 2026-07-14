@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PikeSun 产品发布 · 力太阳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PikeSun Design System — 力太阳
+   Template: Landing / Event
+   ============================================================ */
+
+:root {
+  --pks-primary: #0071E3;
+  --pks-primary-rgb: 0, 113, 227;
+  --pks-accent: #FF9500;
+  --pks-accent-rgb: 255, 149, 0;
+  --pks-pop: #FF3B30;
+  --pks-pop-rgb: 255, 59, 48;
+  --pks-ink: #1A1A2E;
+  --pks-ink-light: #4A4A5A;
+  --pks-ink-faint: #8A8A9A;
+  --pks-cream: #fefcf6;
+  --pks-card: #fff;
+  --pks-dark-panel: #151821;
+
+  --pks-space-xs: 4px;
+  --pks-space-sm: 8px;
+  --pks-space-md: 16px;
+  --pks-space-lg: 24px;
+  --pks-space-xl: 32px;
+  --pks-space-2xl: 48px;
+  --pks-space-3xl: 64px;
+  --pks-space-4xl: 96px;
+
+  --pks-font-display: "Fraunces", "Noto Serif SC", serif;
+  --pks-font-heading: "Noto Serif SC", "Fraunces", serif;
+  --pks-font-body: "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  --pks-font-hand: "Caveat", cursive;
+
+  --pks-radius-sm: 6px;
+  --pks-radius-md: 10px;
+  --pks-radius-lg: 16px;
+  --pks-radius-full: 999px;
+
+  --pks-shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --pks-shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --pks-shadow-lg: 0 12px 32px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.05);
+
+  --pks-content-max: 1100px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--pks-font-body);
+  color: var(--pks-ink);
+  background: var(--pks-cream);
+  line-height: 1.7;
+}
+
+/* ---- Nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pks-space-xl);
+  height: 56px;
+  background: rgba(254, 252, 246, 0.82);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.nav-brand {
+  font-family: var(--pks-font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--pks-ink);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--pks-space-lg);
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--pks-ink-light);
+  text-decoration: none;
+  padding: var(--pks-space-xs) 0;
+  border-bottom: 2px solid transparent;
+  transition: color .18s, border-color .18s;
+}
+
+.nav-links a:hover { color: var(--pks-primary); border-bottom-color: var(--pks-primary); }
+
+.nav-cta {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff !important;
+  background: var(--pks-primary);
+  padding: var(--pks-space-sm) var(--pks-space-lg) !important;
+  border-radius: var(--pks-radius-full) !important;
+  border: none !important;
+  transition: background .18s, transform .18s;
+}
+
+.nav-cta:hover { background: var(--pks-accent) !important; transform: scale(1.04); border-bottom-color: transparent !important; }
+
+/* ---- Section ---- */
+.section {
+  padding: var(--pks-space-4xl) var(--pks-space-xl);
+}
+
+.section-inner {
+  max-width: var(--pks-content-max);
+  margin: 0 auto;
+}
+
+/* Cream bg sections (odd) — default body bg */
+.section-light { background: var(--pks-cream); }
+
+/* Dark panel sections (even primary sections) */
+.section-dark {
+  background: var(--pks-dark-panel);
+  color: #d4d4dc;
+}
+
+.section-dark h2,
+.section-dark h3 { color: #fff; }
+.section-dark p { color: #a0a0b0; }
+
+/* ---- Hero ---- */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--pks-space-4xl) var(--pks-space-xl);
+}
+
+.hero-inner { max-width: 720px; }
+
+.hero-overline {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--pks-accent);
+  margin-bottom: var(--pks-space-lg);
+}
+
+.hero-title {
+  font-family: var(--pks-font-heading);
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--pks-ink);
+  margin-bottom: var(--pks-space-lg);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--pks-ink-light);
+  max-width: 540px;
+  margin: 0 auto var(--pks-space-xl);
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pks-space-sm);
+  font-family: var(--pks-font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--pks-primary);
+  padding: var(--pks-space-md) var(--pks-space-2xl);
+  border-radius: var(--pks-radius-full);
+  text-decoration: none;
+  transition: background .18s, transform .18s, box-shadow .18s;
+  box-shadow: 0 4px 16px rgba(var(--pks-primary-rgb), 0.30);
+}
+
+.hero-cta:hover {
+  background: var(--pks-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(var(--pks-accent-rgb), 0.35);
+}
+
+/* ---- Section titles ---- */
+.section-title {
+  font-family: var(--pks-font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: var(--pks-space-sm);
+}
+
+.section-desc {
+  text-align: center;
+  color: var(--pks-ink-light);
+  max-width: 540px;
+  margin: 0 auto var(--pks-space-3xl);
+}
+
+/* ---- Feature Grid ---- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--pks-space-xl);
+}
+
+.feature-card {
+  background: var(--pks-card);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--pks-radius-lg);
+  padding: var(--pks-space-2xl) var(--pks-space-xl);
+  text-align: center;
+  box-shadow: var(--pks-shadow-sm);
+  transition: box-shadow .2s, transform .2s;
+}
+
+.feature-card:hover {
+  box-shadow: var(--pks-shadow-md);
+  transform: translateY(-3px);
+}
+
+.feature-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--pks-radius-md);
+  background: rgba(var(--pks-primary-rgb), 0.08);
+  color: var(--pks-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--pks-space-lg);
+  font-size: 1.6rem;
+}
+
+.feature-card h3 {
+  font-family: var(--pks-font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: var(--pks-space-sm);
+  color: var(--pks-ink);
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: var(--pks-ink-faint);
+  line-height: 1.6;
+}
+
+/* ---- Stats Row ---- */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--pks-space-xl);
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--pks-font-display);
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--pks-primary);
+  line-height: 1.1;
+  margin-bottom: var(--pks-space-xs);
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  color: var(--pks-ink-faint);
+  font-weight: 500;
+}
+
+/* ---- Testimonials ---- */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--pks-space-xl);
+}
+
+.testimonial-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--pks-radius-lg);
+  padding: var(--pks-space-2xl);
+}
+
+.testimonial-quote {
+  font-family: var(--pks-font-heading);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: var(--pks-space-lg);
+  position: relative;
+  padding-left: var(--pks-space-xl);
+}
+
+.testimonial-quote::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -4px;
+  font-family: var(--pks-font-display);
+  font-size: 2.5rem;
+  color: var(--pks-accent);
+  line-height: 1;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: var(--pks-space-md);
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--pks-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+.testimonial-name { font-weight: 700; font-size: 0.92rem; }
+.testimonial-role { font-size: 0.82rem; color: #a0a0b0; }
+
+/* ---- CTA bottom ---- */
+.cta-section { text-align: center; padding: var(--pks-space-4xl) var(--pks-space-xl); }
+
+.cta-section .section-title { color: var(--pks-ink); }
+
+.cta-buttons {
+  display: flex;
+  gap: var(--pks-space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--pks-space-xl);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pks-space-sm);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: var(--pks-space-md) var(--pks-space-2xl);
+  border-radius: var(--pks-radius-full);
+  text-decoration: none;
+  transition: background .18s, transform .18s, box-shadow .18s;
+}
+
+.btn-primary {
+  color: #fff;
+  background: var(--pks-primary);
+  box-shadow: 0 4px 16px rgba(var(--pks-primary-rgb), 0.30);
+}
+.btn-primary:hover { background: var(--pks-accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(var(--pks-accent-rgb), 0.35); }
+
+.btn-outline {
+  color: var(--pks-primary);
+  background: transparent;
+  border: 2px solid var(--pks-primary);
+}
+.btn-outline:hover { background: rgba(var(--pks-primary-rgb), 0.06); }
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--pks-dark-panel);
+  color: #a0a0b0;
+  padding: var(--pks-space-2xl) var(--pks-space-xl);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.footer-brand {
+  font-family: var(--pks-font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--pks-space-sm);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--pks-space-lg);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: var(--pks-space-md) 0;
+  list-style: none;
+}
+
+.footer-links a {
+  color: #a0a0b0;
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+.footer-links a:hover { color: var(--pks-primary); }
+
+/* ---- Responsive ---- */
+@media (max-width: 750px) {
+  html { font-size: 16px; }
+
+  .hero-title { font-size: 2.2rem; }
+  .hero { min-height: 60vh; }
+
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: repeat(3, 1fr); gap: var(--pks-space-lg); }
+  .stat-value { font-size: 2.4rem; }
+
+  .section { padding: var(--pks-space-3xl) var(--pks-space-lg); }
+}
+
+@media (max-width: 480px) {
+  html { font-size: 15px; }
+
+  .hero-title { font-size: 1.7rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .hero { min-height: 50vh; padding: var(--pks-space-3xl) var(--pks-space-md); }
+
+  .feature-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr; gap: var(--pks-space-lg); }
+  .nav-links { gap: var(--pks-space-sm); }
+  .nav-links a { font-size: 0.75rem; }
+  .nav-cta { padding: var(--pks-space-xs) var(--pks-space-md) !important; font-size: 0.72rem; }
+
+  .section-title { font-size: 1.5rem; }
+  .section { padding: var(--pks-space-2xl) var(--pks-space-md); }
+
+  .cta-buttons { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 300px; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="site-nav">
+  <a href="#" class="nav-brand">力太阳</a>
+  <ul class="nav-links">
+    <li><a href="#features">产品</a></li>
+    <li><a href="#stats">数据</a></li>
+    <li><a href="#testimonials">评价</a></li>
+    <li><a href="#cta" class="nav-cta">立即体验</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero section-light">
+  <div class="hero-inner">
+    <div class="hero-overline">PikeSun 2.0 正式发布</div>
+    <h1 class="hero-title">用一套设计语言，<br>统一你的产品体验</h1>
+    <p class="hero-subtitle">
+      PikeSun 是面向中文 Web 的开源设计系统——从色彩、字体到组件，
+      为创意团队提供开箱即用的视觉一致性。
+    </p>
+    <a href="#cta" class="hero-cta">
+      免费开始使用 &rarr;
+    </a>
+  </div>
+</section>
+
+<!-- ============ FEATURES (light bg) ============ -->
+<section class="section section-light" id="features">
+  <div class="section-inner">
+    <h2 class="section-title">为什么选择 PikeSun？</h2>
+    <p class="section-desc">
+      每一处细节都为中文排版与双语内容打磨，让你专注于创作而非调参。
+    </p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#9733;</div>
+        <h3>双语字体方案</h3>
+        <p>Noto Serif SC + Fraunces 的标题组合，搭配 Noto Sans SC 正文，天然适配中英混排。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9635;</div>
+        <h3>温暖配色</h3>
+        <p>奶油基底 + 克制蓝橙，在专业与亲和之间找到平衡，告别冷淡的黑白灰。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9881;</div>
+        <h3>CSS 变量驱动</h3>
+        <p>全系统通过 <code>:root</code> 变量配置，换色只需修改一行，主题化成本趋近于零。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9633;</div>
+        <h3>响应式开箱即用</h3>
+        <p>750px / 480px 两档断点，页面、卡片、网格自动适配手机、平板与桌面。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9826;</div>
+        <h3>组件模板库</h3>
+        <p>教程页、落地页、App 仪表盘、社交卡片——四种模板覆盖最常见的内容场景。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9830;</div>
+        <h3>完全开源</h3>
+        <p>MIT 协议，自由使用、修改与分发。社区驱动，持续迭代。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS (dark panel) ============ -->
+<section class="section section-dark" id="stats">
+  <div class="section-inner">
+    <h2 class="section-title" style="color:#fff;">被开发者信赖</h2>
+    <p class="section-desc" style="color:#808090;">
+      来自全球中文开发社区的真实数据。
+    </p>
+    <div class="stats-row">
+      <div>
+        <div class="stat-value">12K+</div>
+        <div class="stat-label">GitHub Stars</div>
+      </div>
+      <div>
+        <div class="stat-value">3.2K</div>
+        <div class="stat-label">活跃项目</div>
+      </div>
+      <div>
+        <div class="stat-value">98%</div>
+        <div class="stat-label">满意度评分</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS (light bg) ============ -->
+<section class="section section-light" id="testimonials">
+  <div class="section-inner">
+    <h2 class="section-title">来自社区的声音</h2>
+    <p class="section-desc">
+      听听使用 PikeSun 的团队怎么说。
+    </p>
+    <div class="testimonial-grid">
+      <div class="testimonial-card" style="background:var(--pks-card); border-color:rgba(0,0,0,.06);">
+        <div class="testimonial-quote" style="color:var(--pks-ink);">
+          PikeSun 让我们的产品在两周内完成了视觉统一，中文排版从未如此舒适。
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">张</div>
+          <div>
+            <div class="testimonial-name">张明远</div>
+            <div class="testimonial-role" style="color:var(--pks-ink-faint);">产品设计总监 · 云帆科技</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card" style="background:var(--pks-card); border-color:rgba(0,0,0,.06);">
+        <div class="testimonial-quote" style="color:var(--pks-ink);">
+          作为开源项目，文档质量出奇地高。模板直接复制就能用，对个人开发者极其友好。
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">林</div>
+          <div>
+            <div class="testimonial-name">林小禾</div>
+            <div class="testimonial-role" style="color:var(--pks-ink-faint);">全栈开发者 · 独立创作</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOTTOM CTA (light bg) ============ -->
+<section class="cta-section section-light" id="cta">
+  <h2 class="section-title">准备好开始了吗？</h2>
+  <p class="section-desc" style="margin-bottom:0;">
+    从第一个 CSS 变量到完整页面，只需五分钟。
+  </p>
+  <div class="cta-buttons">
+    <a href="#" class="btn btn-primary">免费下载模板 &darr;</a>
+    <a href="#" class="btn btn-outline">查看文档 &rarr;</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-brand">力太阳</div>
+  <ul class="footer-links">
+    <li><a href="#">GitHub</a></li>
+    <li><a href="#">文档</a></li>
+    <li><a href="#">关于</a></li>
+    <li><a href="#">联系我们</a></li>
+  </ul>
+  <p>&copy; 2026 PikeSun Design System. MIT License.</p>
+</footer>
+
+</body>
+</html>

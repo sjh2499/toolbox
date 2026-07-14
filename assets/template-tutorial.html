@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PikeSun 教程 · 力太阳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PikeSun Design System — 力太阳
+   Template: Tutorial / Article
+   ============================================================ */
+
+:root {
+  /* Brand */
+  --pks-primary: #0071E3;
+  --pks-primary-rgb: 0, 113, 227;
+  --pks-accent: #FF9500;
+  --pks-accent-rgb: 255, 149, 0;
+  --pks-pop: #FF3B30;
+  --pks-pop-rgb: 255, 59, 48;
+
+  /* Ink scale */
+  --pks-ink: #1A1A2E;
+  --pks-ink-light: #4A4A5A;
+  --pks-ink-faint: #8A8A9A;
+
+  /* Surfaces */
+  --pks-cream: #fefcf6;
+  --pks-card: #fff;
+
+  /* Spacing */
+  --pks-space-xs: 4px;
+  --pks-space-sm: 8px;
+  --pks-space-md: 16px;
+  --pks-space-lg: 24px;
+  --pks-space-xl: 32px;
+  --pks-space-2xl: 48px;
+  --pks-space-3xl: 64px;
+
+  /* Typography */
+  --pks-font-display: "Fraunces", "Noto Serif SC", serif;
+  --pks-font-heading: "Noto Serif SC", "Fraunces", serif;
+  --pks-font-body: "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  --pks-font-hand: "Caveat", cursive;
+  --pks-font-mono: "SF Mono", "Fira Code", "Consolas", monospace;
+
+  /* Radii */
+  --pks-radius-sm: 6px;
+  --pks-radius-md: 10px;
+  --pks-radius-lg: 16px;
+  --pks-radius-full: 999px;
+
+  /* Shadows */
+  --pks-shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --pks-shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --pks-shadow-lg: 0 12px 32px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.05);
+
+  /* Widths */
+  --pks-content-max: 720px;
+  --pks-wide-max: 960px;
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--pks-font-body);
+  color: var(--pks-ink);
+  background: var(--pks-cream);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ---- Nav ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pks-space-xl);
+  height: 56px;
+  background: rgba(254, 252, 246, 0.82);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nav-brand {
+  font-family: var(--pks-font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--pks-ink);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--pks-space-sm);
+}
+
+.nav-brand span {
+  font-family: var(--pks-font-heading);
+  font-weight: 900;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--pks-space-lg);
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--pks-ink-light);
+  text-decoration: none;
+  padding: var(--pks-space-xs) 0;
+  border-bottom: 2px solid transparent;
+  transition: color .18s, border-color .18s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--pks-primary);
+  border-bottom-color: var(--pks-primary);
+}
+
+/* ---- Hero ---- */
+.hero {
+  max-width: var(--pks-content-max);
+  margin: 0 auto;
+  padding: var(--pks-space-3xl) var(--pks-space-xl) var(--pks-space-2xl);
+  text-align: center;
+}
+
+.hero-label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--pks-primary);
+  background: rgba(var(--pks-primary-rgb), 0.08);
+  padding: var(--pks-space-xs) var(--pks-space-md);
+  border-radius: var(--pks-radius-full);
+  margin-bottom: var(--pks-space-lg);
+}
+
+.hero-title {
+  font-family: var(--pks-font-heading);
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1.25;
+  color: var(--pks-ink);
+  margin-bottom: var(--pks-space-md);
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--pks-ink-light);
+  max-width: 560px;
+  margin: 0 auto var(--pks-space-lg);
+  line-height: 1.65;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pks-space-md);
+  font-size: 0.85rem;
+  color: var(--pks-ink-faint);
+}
+
+.hero-meta span { opacity: .5; }
+
+/* ---- Content ---- */
+.content-area {
+  max-width: var(--pks-content-max);
+  margin: 0 auto;
+  padding: 0 var(--pks-space-xl) var(--pks-space-3xl);
+}
+
+.content-area h2 {
+  font-family: var(--pks-font-heading);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--pks-ink);
+  margin: var(--pks-space-3xl) 0 var(--pks-space-md);
+  line-height: 1.35;
+}
+
+.content-area h2:first-child { margin-top: 0; }
+
+.content-area h3 {
+  font-family: var(--pks-font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--pks-ink);
+  margin: var(--pks-space-2xl) 0 var(--pks-space-sm);
+}
+
+.content-area p {
+  margin-bottom: var(--pks-space-md);
+  font-size: 1rem;
+  color: var(--pks-ink-light);
+}
+
+.content-area a {
+  color: var(--pks-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.content-area a:hover { color: var(--pks-accent); }
+
+.content-area strong { color: var(--pks-ink); font-weight: 700; }
+
+.content-area em {
+  font-family: var(--pks-font-hand);
+  font-size: 1.2em;
+  font-style: normal;
+  color: var(--pks-ink-light);
+}
+
+/* ---- Alternating section arrangements ---- */
+
+/* Full-width text */
+.section-full {
+  margin: var(--pks-space-2xl) 0;
+}
+
+/* Side-by-side */
+.section-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--pks-space-2xl);
+  align-items: center;
+  margin: var(--pks-space-2xl) 0;
+}
+
+.section-side .side-text h3 { margin-top: 0; }
+.section-side .side-visual {
+  background: linear-gradient(135deg, var(--pks-cream), rgba(var(--pks-primary-rgb), 0.04));
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--pks-radius-lg);
+  padding: var(--pks-space-2xl);
+  text-align: center;
+  font-family: var(--pks-font-display);
+  font-size: 3rem;
+  color: var(--pks-primary);
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card grid (3 col) */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--pks-space-lg);
+  margin: var(--pks-space-2xl) 0;
+}
+
+.card-grid .card {
+  background: var(--pks-card);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--pks-radius-md);
+  padding: var(--pks-space-xl);
+  box-shadow: var(--pks-shadow-sm);
+  transition: box-shadow .2s, transform .2s;
+}
+
+.card-grid .card:hover {
+  box-shadow: var(--pks-shadow-md);
+  transform: translateY(-2px);
+}
+
+.card-grid .card h4 {
+  font-family: var(--pks-font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: var(--pks-space-sm);
+}
+
+.card-grid .card p {
+  font-size: 0.9rem;
+  color: var(--pks-ink-faint);
+  margin: 0;
+}
+
+/* ---- Code blocks ---- */
+:not(pre) > code {
+  font-family: var(--pks-font-mono);
+  font-size: 0.88em;
+  background: rgba(var(--pks-primary-rgb), 0.07);
+  color: var(--pks-primary);
+  padding: 2px 7px;
+  border-radius: var(--pks-radius-sm);
+}
+
+pre {
+  background: var(--pks-ink);
+  color: #e4e4e7;
+  padding: var(--pks-space-xl);
+  border-radius: var(--pks-radius-md);
+  overflow-x: auto;
+  font-family: var(--pks-font-mono);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  margin: var(--pks-space-lg) 0;
+  position: relative;
+}
+
+pre::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: var(--pks-space-sm);
+  right: var(--pks-space-md);
+  font-family: var(--pks-font-body);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,.25);
+}
+
+pre code {
+  font-family: inherit;
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ---- Callout / Note ---- */
+.callout {
+  display: flex;
+  gap: var(--pks-space-md);
+  padding: var(--pks-space-lg) var(--pks-space-xl);
+  border-radius: var(--pks-radius-md);
+  margin: var(--pks-space-xl) 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.callout-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.callout-body { flex: 1; }
+.callout-body strong { display: block; margin-bottom: 2px; }
+.callout-body p { margin: 0; font-size: 0.92rem; }
+
+/* info */
+.callout-info {
+  background: rgba(var(--pks-primary-rgb), 0.06);
+  border-left: 3px solid var(--pks-primary);
+}
+.callout-info .callout-icon { background: var(--pks-primary); color: #fff; }
+
+/* warning */
+.callout-warning {
+  background: rgba(var(--pks-accent-rgb), 0.08);
+  border-left: 3px solid var(--pks-accent);
+}
+.callout-warning .callout-icon { background: var(--pks-accent); color: #fff; }
+
+/* danger */
+.callout-danger {
+  background: rgba(var(--pks-pop-rgb), 0.06);
+  border-left: 3px solid var(--pks-pop);
+}
+.callout-danger .callout-icon { background: var(--pks-pop); color: #fff; }
+
+/* ---- Step list ---- */
+.step-list {
+  list-style: none;
+  counter-reset: step;
+  margin: var(--pks-space-xl) 0;
+}
+
+.step-list li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 56px;
+  margin-bottom: var(--pks-space-xl);
+  min-height: 42px;
+}
+
+.step-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--pks-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(var(--pks-primary-rgb), 0.25);
+}
+
+.step-list li h4 {
+  font-family: var(--pks-font-heading);
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--pks-ink);
+}
+
+.step-list li p {
+  margin: 0;
+  font-size: 0.94rem;
+  color: var(--pks-ink-light);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  border-top: 1px solid rgba(0,0,0,.06);
+  padding: var(--pks-space-2xl) var(--pks-space-xl);
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: var(--pks-font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--pks-ink);
+  margin-bottom: var(--pks-space-sm);
+}
+
+.footer-credit {
+  font-size: 0.82rem;
+  color: var(--pks-ink-faint);
+  line-height: 1.7;
+}
+
+.footer-credit a {
+  color: var(--pks-primary);
+  text-decoration: none;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 750px) {
+  html { font-size: 16px; }
+
+  .hero { padding: var(--pks-space-2xl) var(--pks-space-lg) var(--pks-space-xl); }
+  .hero-title { font-size: 2rem; }
+
+  .section-side {
+    grid-template-columns: 1fr;
+    gap: var(--pks-space-lg);
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .site-nav { padding: 0 var(--pks-space-lg); }
+  .content-area { padding: 0 var(--pks-space-lg) var(--pks-space-2xl); }
+}
+
+@media (max-width: 480px) {
+  html { font-size: 15px; }
+
+  .hero { padding: var(--pks-space-xl) var(--pks-space-md) var(--pks-space-lg); }
+  .hero-title { font-size: 1.6rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-meta { flex-direction: column; gap: 2px; }
+  .hero-meta span { display: none; }
+
+  .card-grid { grid-template-columns: 1fr; }
+
+  .nav-links { gap: var(--pks-space-md); }
+  .nav-links a { font-size: 0.8rem; }
+
+  .site-nav { padding: 0 var(--pks-space-md); }
+  .content-area { padding: 0 var(--pks-space-md) var(--pks-space-xl); }
+
+  .callout { padding: var(--pks-space-md) var(--pks-space-lg); flex-direction: column; gap: var(--pks-space-sm); }
+
+  pre { padding: var(--pks-space-md); font-size: 0.78rem; }
+
+  .step-list li { padding-left: 44px; }
+  .step-list li::before { width: 30px; height: 30px; font-size: 0.82rem; }
+
+  .section-side .side-visual { padding: var(--pks-space-xl); font-size: 2rem; min-height: 140px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="site-nav">
+  <a href="#" class="nav-brand">
+    <span>力</span>太阳
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">首页</a></li>
+    <li><a href="#" class="active">教程</a></li>
+    <li><a href="#">案例</a></li>
+    <li><a href="#">关于</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-label">Tutorial</div>
+  <h1 class="hero-title">使用 PikeSun 构建现代设计系统</h1>
+  <p class="hero-subtitle">
+    一套优雅的配色、双语字体与组件模式，帮助你在中文 Web 项目中高效落地一致的设计语言。
+  </p>
+  <div class="hero-meta">
+    力太阳团队 <span>·</span> 2026-07-14 <span>·</span> 12 分钟阅读
+  </div>
+</header>
+
+<!-- ============ CONTENT ============ -->
+<main class="content-area">
+
+  <!-- Full-width text section -->
+  <section class="section-full">
+    <h2>一、设计理念</h2>
+    <p>
+      PikeSun（力太阳）的核心是一套 <strong>克制而温暖</strong> 的设计语言。以奶油白
+      <code>#fefcf6</code> 为基底，搭配深邃的墨色 <code>#1A1A2E</code> 与克制的蓝色强调
+      <code>#0071E3</code>，在专业感与亲和力之间找到平衡。
+    </p>
+    <p>
+      这套系统专为中英文混排优化——标题使用 <em>Noto Serif SC</em> 与 <em>Fraunces</em>，
+      正文使用 <em>Noto Sans SC</em>，并保留了手写体 <em>Caveat</em> 用于注释与点缀。
+    </p>
+  </section>
+
+  <!-- Side-by-side section -->
+  <section class="section-side">
+    <div class="side-text">
+      <h3>色彩体系</h3>
+      <p>
+        六个主色构建完整情绪光谱。主色蓝提供信任与稳定；强调色橙注入活力与行动；
+        弹出红用于关键警示。基础色系由奶油底、卡白和三层墨色组成，覆盖所有界面层级。
+      </p>
+    </div>
+    <div class="side-visual" aria-hidden="true">
+      &#9670; &#9670; &#9670;
+    </div>
+  </section>
+
+  <!-- Card grid section -->
+  <section>
+    <h2>二、核心组件一览</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h4>导航栏</h4>
+        <p>毛玻璃效果的粘性顶栏，适配移动端与桌面端，Logo 使用 <em>Fraunces</em> 装饰字体。</p>
+      </div>
+      <div class="card">
+        <h4>Hero 区</h4>
+        <p>居中以标题引领，配合标签、副标题与元数据行，构建清晰的信息层级入口。</p>
+      </div>
+      <div class="card">
+        <h4>内容排版</h4>
+        <p>衬线标题 + 无衬线正文的标准搭配，确保中英文长文本的阅读舒适度。</p>
+      </div>
+      <div class="card">
+        <h4>代码块</h4>
+        <p>深色底代码块支持语言标签，行内代码以主色高亮，<code>pre</code> 与 <code>code</code> 均覆盖。</p>
+      </div>
+      <div class="card">
+        <h4>Callout 提示</h4>
+        <p>Info / Warning / Danger 三级提示框，带圆标图标与左侧色条，灵活嵌入正文。</p>
+      </div>
+      <div class="card">
+        <h4>步骤列表</h4>
+        <p>CSS 计数器驱动的编号步骤列表，适合教程与说明文档中的有序指引。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Side-by-side reversed -->
+  <section class="section-side">
+    <div class="side-visual" aria-hidden="true">
+      &#10003; &#10003; &#10003;
+    </div>
+    <div class="side-text">
+      <h3>响应式策略</h3>
+      <p>
+        系统以 <strong>750px</strong> 和 <strong>480px</strong> 两个断点覆盖平板与手机。
+        侧排布局退化为单列；卡片网格从三列逐步收拢为单列；字号、间距同步缩减，
+        确保在所有设备上的可读性。
+      </p>
+    </div>
+  </section>
+
+  <!-- Code block demo -->
+  <section class="section-full">
+    <h2>三、快速上手</h2>
+    <p>在项目中引入 PikeSun 只需复制以下 CSS 变量定义：</p>
+    <pre data-lang="css"><code>:root {
+  --pks-primary:  #0071E3;
+  --pks-accent:   #FF9500;
+  --pks-pop:      #FF3B30;
+  --pks-ink:      #1A1A2E;
+  --pks-cream:    #fefcf6;
+  /* ... see full list in _variables.css */
+}</code></pre>
+  </section>
+
+  <!-- Callouts -->
+  <section class="section-full">
+    <h3>重要提示</h3>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">i</div>
+      <div class="callout-body">
+        <strong>建议</strong>
+        <p>Fonts 使用 Google Fonts CDN 引入，生产环境建议自托管以获得更快的首屏加载速度。</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warning">
+      <div class="callout-icon">!</div>
+      <div class="callout-body">
+        <strong>注意</strong>
+        <p>Fraunces 与 Noto Serif SC 均为可变字体，CDN 请求体积较大。如只需特定字重，请在 URL 中限定 <code>wght</code> 轴范围。</p>
+      </div>
+    </div>
+
+    <div class="callout callout-danger">
+      <div class="callout-icon">!</div>
+      <div class="callout-body">
+        <strong>重要</strong>
+        <p>所有页面必须在 <code>&lt;meta charset="UTF-8"&gt;</code> 之后尽早引入字体 CSS，
+        避免 <em>FOUT</em>（无样式文本闪烁）。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step list -->
+  <section class="section-full">
+    <h2>四、完整集成步骤</h2>
+    <ol class="step-list">
+      <li>
+        <h4>创建 CSS 变量文件</h4>
+        <p>在项目中新建 <code>_variables.css</code>，复制上述变量定义，确保 <code>:root</code> 块完整。</p>
+      </li>
+      <li>
+        <h4>引入字体 CDN</h4>
+        <p>在 <code>&lt;head&gt;</code> 中添加 Google Fonts 链接，优先于自己的样式表加载。</p>
+      </li>
+      <li>
+        <h4>覆盖全局样式</h4>
+        <p>将 <code>html</code>、<code>body</code> 的字体与颜色设置为对应的 CSS 变量，完成基础适配。</p>
+      </li>
+      <li>
+        <h4>按需引入组件</h4>
+        <p>从模板中提取所需组件（Nav、Hero、Callout、Step-list 等）到独立的 <code>.css</code> 文件。</p>
+      </li>
+    </ol>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-brand">力太阳</div>
+  <p class="footer-credit">
+    PikeSun Design System — Built with care by the <a href="#">力太阳</a> team.
+  </p>
+</footer>
+
+</body>
+</html>
