@@ -1,12 +1,27 @@
 /**
- * Client-side PDF processing engine using pdf-lib + pdfjs-dist + JSZip
- * No external API key required — all operations run in the browser.
+ * Client-side PDF processing engine
+ * - pdf-lib: static import — merge, split, compress, jpgToPdf, protect (always works)
+ * - pdfjs-dist + JSZip: lazy loaded — pdfToJpg, pdfToWord, unlockPdf (load on demand)
  */
 import { PDFDocument } from 'pdf-lib'
-import * as pdfjsLib from 'pdfjs-dist'
-import JSZip from 'jszip'
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'
+// ── lazy loaders (only for tools that need pdf.js) ──
+
+let _pdfjs = null
+async function loadPdfjs() {
+  if (_pdfjs) return _pdfjs
+  const mod = await import('pdfjs-dist')
+  mod.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'
+  _pdfjs = mod
+  return mod
+}
+
+let _JSZip = null
+async function loadJSZip() {
+  if (_JSZip) return _JSZip
+  _JSZip = (await import('jszip')).default
+  return _JSZip
+}
 
 // ── helpers ──
 
@@ -23,18 +38,7 @@ function arrayBufferToBlob(buffer, mime = 'application/pdf') {
   return new Blob([buffer], { type: mime })
 }
 
-async function renderPageToJpeg(pdfDoc, pageNum, quality = 0.9) {
-  const page = await pdfDoc.getPage(pageNum)
-  const viewport = page.getViewport({ scale: 2.0 })
-  const canvas = document.createElement('canvas')
-  canvas.width = viewport.width
-  canvas.height = viewport.height
-  const ctx = canvas.getContext('2d')
-  await page.render({ canvasContext: ctx, viewport }).promise
-  return new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality))
-}
-
-// ── public API ──
+// ── pdf-lib only tools (no lazy loading needed) ──
 
 export async function mergePdf(files) {
   const merged = await PDFDocument.create()
@@ -79,25 +83,10 @@ export async function splitPdf(files, params = {}) {
   return arrayBufferToBlob(await out.save({ useObjectStreams: true }))
 }
 
-export async function compressPdf(files, params = {}) {
+export async function compressPdf(files) {
   const buf = await readAsArrayBuffer(files[0])
   const src = await PDFDocument.load(buf, { ignoreEncryption: true })
   return arrayBufferToBlob(await src.save({ useObjectStreams: true }))
-}
-
-export async function pdfToJpg(files) {
-  const buf = await readAsArrayBuffer(files[0])
-  const pdf = await pdfjsLib.getDocument({ data: buf }).promise
-  const zip = new JSZip()
-  const ext = 'jpg'
-
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const blob = await renderPageToJpeg(pdf, i, 0.9)
-    zip.file(`page_${String(i).padStart(3, '0')}.${ext}`, blob)
-  }
-
-  const zipBlob = await zip.generateAsync({ type: 'blob' })
-  return zipBlob
 }
 
 export async function jpgToPdf(files) {
@@ -180,46 +169,66 @@ catch(ex){e.textContent='密码错误或文件损坏'}}
   return new Blob([html], { type: 'text/html' })
 }
 
-export async function unlockPdf(files, params = {}) {
-  const password = params.password || ''
-  if (!password) throw new Error('请输入密码')
+// ── Tools that need pdf.js (lazy-loaded) ──
+
+async function renderPageToJpeg(pdfDoc, pageNum, quality = 0.9) {
+  const page = await pdfDoc.getPage(pageNum)
+  const viewport = page.getViewport({ scale: 2.0 })
+  const canvas = document.createElement('canvas')
+  canvas.width = viewport.width
+  canvas.height = viewport.height
+  const ctx = canvas.getContext('2d')
+  await page.render({ canvasContext: ctx, viewport }).promise
+  return new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality))
+}
+
+export async function pdfToJpg(files) {
+  const [pdfjsLib, JSZip] = await Promise.all([loadPdfjs(), loadJSZip()])
   const buf = await readAsArrayBuffer(files[0])
-  try {
-    const pdf = await pdfjsLib.getDocument({ data: buf, password }).promise
-    const newDoc = await PDFDocument.create()
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i)
-      const viewport = page.getViewport({ scale: 2.0 })
-      const canvas = document.createElement('canvas')
-      canvas.width = viewport.width
-      canvas.height = viewport.height
-      const ctx = canvas.getContext('2d')
-      await page.render({ canvasContext: ctx, viewport }).promise
-      const imgBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'))
-      const imgBuf = await imgBlob.arrayBuffer()
-      const img = await newDoc.embedPng(imgBuf)
-      const newPage = newDoc.addPage([img.width, img.height])
-      newPage.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height })
-    }
-    return arrayBufferToBlob(await newDoc.save({ useObjectStreams: true }))
-  } catch (e) {
-    throw new Error('密码错误，或文件不是加密 PDF')
+  const pdf = await pdfjsLib.getDocument({ data: buf }).promise
+  const zip = new JSZip()
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const blob = await renderPageToJpeg(pdf, i, 0.9)
+    zip.file(`page_${String(i).padStart(3, '0')}.jpg`, blob)
   }
+  return await zip.generateAsync({ type: 'blob' })
 }
 
 export async function pdfToWord(files) {
+  const pdfjsLib = await loadPdfjs()
   const buf = await readAsArrayBuffer(files[0])
   const pdf = await pdfjsLib.getDocument({ data: buf }).promise
   const texts = []
-
   for (let i = 1; i <= pdf.numPages; i++) {
     const page = await pdf.getPage(i)
     const content = await page.getTextContent()
     const pageText = content.items.map(item => item.str).join(' ')
     texts.push(`[第 ${i} 页]\n${pageText}\n`)
   }
-
-  const fullText = texts.join('\n')
   const bom = '﻿'
-  return new Blob([bom + fullText], { type: 'application/msword;charset=utf-8' })
+  return new Blob([bom + texts.join('\n')], { type: 'application/msword;charset=utf-8' })
+}
+
+export async function unlockPdf(files, params = {}) {
+  const password = params.password || ''
+  if (!password) throw new Error('请输入密码')
+  const pdfjsLib = await loadPdfjs()
+  const buf = await readAsArrayBuffer(files[0])
+  const pdf = await pdfjsLib.getDocument({ data: buf, password }).promise
+  const newDoc = await PDFDocument.create()
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i)
+    const viewport = page.getViewport({ scale: 2.0 })
+    const canvas = document.createElement('canvas')
+    canvas.width = viewport.width
+    canvas.height = viewport.height
+    const ctx = canvas.getContext('2d')
+    await page.render({ canvasContext: ctx, viewport }).promise
+    const imgBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'))
+    const imgBuf = await imgBlob.arrayBuffer()
+    const img = await newDoc.embedPng(imgBuf)
+    const newPage = newDoc.addPage([img.width, img.height])
+    newPage.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height })
+  }
+  return arrayBufferToBlob(await newDoc.save({ useObjectStreams: true }))
 }
