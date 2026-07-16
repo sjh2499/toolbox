@@ -1,307 +1,372 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>力太阳 · 个人主页</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz@0,9..144,700;1,9..144,400&family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* === Brand DNA === */
-    :root {
-      --primary: #0071E3;
-      --primary-deep: #0059B3;
-      --accent: #FF9500;
-      --accent-soft: #FFF3E0;
-      --pop: #FF3B30;
-      --cream: #fefcf6;
-      --cream-dark: #faf6eb;
-      --ink: #1A1A2E;
-      --ink-light: #4A4A5A;
-      --ink-faint: #8A8A9A;
-      --card-bg: #fff;
-      --border: rgba(26,26,26,.07);
-      --shadow-sm: 0 1px 3px rgba(0,0,0,.04);
-      --shadow-md: 0 4px 16px rgba(0,0,0,.08);
-      --shadow-lg: 0 12px 40px rgba(0,0,0,.12);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>力太阳 · 个人主页</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Fira+Code:wght@400;500&family=Fraunces:ital,wght@0,400;0,900;1,400&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #fefcf6;
+  --cream-dark: #faf6eb;
+  --ink: #1A1A2E;
+  --ink-light: #4A4A5A;
+  --ink-faint: #8A8A9A;
+  --blue: #0071E3;
+  --orange: #FF9500;
+  --red: #FF3B30;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    body {
-      font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--ink);
-      background: var(--cream);
-      -webkit-font-smoothing: antialiased;
-    }
+html { scroll-behavior: smooth; }
 
-    ::selection { background: var(--accent); color: var(--ink); }
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 100px;
+}
 
-    /* === Top accent bar === */
-    body::before {
-      content: '';
-      position: fixed; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--primary);
-      z-index: 9999;
-    }
+/* ============================================
+   TAB SYSTEM
+   ============================================ */
+.tab-page { display: none; }
+.tab-page.active { display: block; }
 
-    /* === Hero === */
-    .hero {
-      padding: clamp(60px, 10vh, 100px) 1.5rem clamp(30px, 5vh, 60px);
-      text-align: center;
-    }
+/* ============================================
+   BOTTOM PILL NAV
+   ============================================ */
+.pill-nav {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(26, 26, 46, 0.08);
+  border-radius: 999px;
+  padding: 5px;
+  box-shadow: 0 8px 32px rgba(26, 26, 46, 0.12);
+}
+.pill-nav button {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-light);
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.pill-nav button:hover { color: var(--ink); }
+.pill-nav button.active {
+  background: var(--blue);
+  color: #fff;
+}
 
-    .hero-avatar {
-      width: 88px; height: 88px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), #4da6ff);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 36px;
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(0,113,227,.25);
-    }
+/* ============================================
+   HOME PAGE
+   ============================================ */
+.home-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.home-avatar {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), #4da6ff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; color: #fff;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 24px rgba(0,113,227,.25);
+}
+.home-hero h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.home-hero .subtitle {
+  font-size: 1rem;
+  color: var(--ink-faint);
+  margin-bottom: 32px;
+}
+.home-hero .tagline {
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  color: var(--ink-light);
+  margin-bottom: 40px;
+}
+.home-links {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+}
+.home-links a {
+  text-decoration: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all .2s;
+}
+.home-links .btn-primary {
+  background: var(--blue); color: #fff;
+}
+.home-links .btn-primary:hover { background: #0059B3; transform: translateY(-1px); }
+.home-links .btn-ghost {
+  border: 1.5px solid rgba(26,26,46,.1); color: var(--ink-light);
+}
+.home-links .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
 
-    .hero h1 {
-      font-family: 'Noto Serif SC', serif;
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
-      font-weight: 900;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
+/* ============================================
+   WORKS PAGE
+   ============================================ */
+.works-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(60px, 10vh, 100px) 1.5rem;
+}
+.works-page h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+.works-page .section-desc {
+  color: var(--ink-faint);
+  margin-bottom: 40px;
+  font-size: 0.95rem;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 600px) { .project-grid { grid-template-columns: 1fr; } }
 
-    .hero .tagline {
-      font-size: 1rem;
-      color: var(--ink-faint);
-      max-width: 480px;
-      margin: 0 auto;
-    }
+.project-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  text-decoration: none; color: inherit;
+  transition: transform .2s, box-shadow .2s;
+  display: flex; flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(0,0,0,.1);
+}
+.project-card.featured { border: 2px solid var(--blue); }
+.project-card.featured::after {
+  content: '✦ 核心';
+  position: absolute; top: 16px; right: 20px;
+  font-family: 'Caveat', cursive;
+  font-size: 0.9rem; color: var(--blue); font-weight: 700;
+}
+.project-icon { font-size: 32px; margin-bottom: 16px; }
+.project-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+.project-card p { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.5; }
+.project-card .badge {
+  display: inline-block; margin-top: 14px;
+  padding: 5px 14px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 600;
+  background: rgba(255,149,0,.1); color: var(--orange);
+  align-self: flex-start;
+}
 
-    .hero .accent-mark {
-      display: inline-block;
-      background: linear-gradient(transparent 55%, var(--accent) 55%);
-      padding: 0 4px;
-    }
+/* ============================================
+   SYSTEM PAGE
+   ============================================ */
+.system-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: clamp(60px, 10vh, 100px) 1.5rem;
+}
+.system-page h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+.system-page .section-desc {
+  color: var(--ink-faint);
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+}
+.system-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  margin-bottom: 20px;
+}
+.system-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+.system-card p { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.5; margin-bottom: 16px; }
+.system-card a {
+  display: inline-block; text-decoration: none;
+  padding: 8px 20px; border-radius: 999px;
+  font-size: 0.85rem; font-weight: 500;
+  background: var(--blue); color: #fff;
+  transition: background .2s;
+}
+.system-card a:hover { background: #0059B3; }
+.color-dots { display: flex; gap: 8px; margin-bottom: 16px; }
+.color-dot { width: 28px; height: 28px; border-radius: 50%; }
+.color-dot.blue { background: var(--blue); }
+.color-dot.orange { background: var(--orange); }
+.color-dot.red { background: var(--red); }
 
-    /* === Stats row === */
-    .stats {
-      display: flex; justify-content: center; gap: clamp(32px, 6vw, 64px);
-      margin: clamp(20px, 3vh, 40px) 0;
-    }
-    .stat { text-align: center; }
-    .stat-num {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 700;
-      color: var(--primary);
-    }
-    .stat-label { font-size: 0.78rem; color: var(--ink-faint); margin-top: 2px; }
-
-    /* === Tool Grid === */
-    .section-title {
-      text-align: center;
-      font-family: 'Noto Serif SC', serif;
-      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-      font-weight: 700;
-      margin: clamp(40px, 6vh, 70px) 0 clamp(24px, 3vh, 36px);
-    }
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 48px; height: 3px;
-      background: var(--accent);
-      margin: 10px auto 0;
-      border-radius: 2px;
-    }
-
-    .container {
-      max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
-    }
-
-    .tool-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(16px, 2vw, 24px);
-    }
-    @media (max-width: 750px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .tool-grid { grid-template-columns: 1fr; } }
-
-    .tool-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: clamp(24px, 3vw, 36px);
-      box-shadow: var(--shadow-sm);
-      cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
-      text-decoration: none;
-      color: inherit;
-      display: flex; flex-direction: column;
-      position: relative; overflow: hidden;
-    }
-    .tool-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-lg);
-    }
-    .tool-card.featured {
-      border: 2px solid var(--primary);
-    }
-    .tool-card.featured::before {
-      content: '✦ 核心工具';
-      position: absolute; top: 12px; right: 16px;
-      font-size: 0.7rem; color: var(--primary);
-      font-weight: 700;
-      font-family: 'Caveat', cursive;
-      font-size: 0.85rem;
-    }
-
-    .tool-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-      margin-bottom: 16px;
-    }
-    .tool-icon.blue   { background: rgba(0,113,227,.1); }
-    .tool-icon.orange { background: rgba(255,149,0,.1); }
-    .tool-icon.red    { background: rgba(255,59,48,.1); }
-    .tool-icon.green  { background: rgba(52,199,89,.1); }
-    .tool-icon.purple { background: rgba(175,82,222,.1); }
-
-    .tool-card h3 {
-      font-size: 1.1rem; font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .tool-card p {
-      font-size: 0.82rem; color: var(--ink-faint);
-      line-height: 1.4;
-    }
-    .tool-card .badge {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-
-    /* === Quick links === */
-    .quick-links {
-      display: flex; justify-content: center; gap: 24px;
-      flex-wrap: wrap;
-      margin: clamp(40px, 6vh, 60px) 0;
-    }
-    .quick-link {
-      text-decoration: none;
-      color: var(--ink-light);
-      font-size: 0.85rem;
-      display: flex; align-items: center; gap: 6px;
-      padding: 8px 16px;
-      border-radius: 20px;
-      transition: all .2s;
-    }
-    .quick-link:hover {
-      background: rgba(0,113,227,.08);
-      color: var(--primary);
-    }
-
-    /* === Footer === */
-    footer {
-      text-align: center;
-      padding: clamp(40px, 6vh, 60px) 1.5rem;
-      color: var(--ink-faint);
-      font-size: 0.78rem;
-      border-top: 1px solid var(--border);
-      margin-top: clamp(40px, 6vh, 80px);
-    }
-    footer .heart { color: var(--pop); }
-  </style>
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--ink-faint);
+  font-size: 0.75rem;
+}
+</style>
 </head>
 <body>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-avatar">⚡</div>
+<!-- ==================== TAB: HOME ==================== -->
+<main class="tab-page active" id="page-home">
+  <section class="home-hero">
+    <div class="home-avatar">⚡</div>
     <h1>力太阳</h1>
-    <p class="tagline">
-      一个<span class="accent-mark">爱折腾</span>的开发者，
-      把常用工具整合在一起，让效率<span class="accent-mark">飞起来</span>
-    </p>
-    <div class="stats">
-      <div class="stat"><div class="stat-num">25+</div><div class="stat-label">在线工具</div></div>
-      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">免费开源</div></div>
-      <div class="stat"><div class="stat-num">PWA</div><div class="stat-label">离线可用</div></div>
+    <p class="subtitle">独立开发者 · 工具创造者</p>
+    <p class="tagline">把常用工具整合在一起，让效率飞起来</p>
+    <div class="home-links">
+      <a href="#" class="btn-primary" onclick="switchTab('works')">🛠️ 我的工具</a>
+      <a href="https://github.com/sjh2499" target="_blank" class="btn-ghost">🐙 GitHub</a>
+      <a href="#" class="btn-ghost" onclick="switchTab('system')">🎨 设计系统</a>
     </div>
   </section>
+</main>
 
-  <!-- Tools -->
-  <div class="container">
-    <div class="section-title">🛠️ 我的工具</div>
-    <div class="tool-grid">
+<!-- ==================== TAB: WORKS ==================== -->
+<main class="tab-page" id="page-works">
+  <div class="works-page">
+    <h2>🛠️ 我的工具</h2>
+    <p class="section-desc">独立开发的项目和工具集合</p>
+    <div class="project-grid">
 
-      <!-- Featured: Toolbox -->
-      <a href="https://toolbox-nine-navy.vercel.app" class="tool-card featured">
-        <div class="tool-icon blue">🧰</div>
+      <a href="https://toolbox-nine-navy.vercel.app" target="_blank" class="project-card featured">
+        <div class="project-icon">🧰</div>
         <h3>力太阳工具箱</h3>
         <p>25+ 在线实用工具：二维码、加密解密、JSON格式化、颜色转换、时间戳、摩尔斯电码…</p>
-        <span class="badge">核心工具</span>
+        <span class="badge">核心项目</span>
       </a>
 
-      <!-- GitHub -->
-      <a href="https://github.com/sjh2499" class="tool-card" target="_blank">
-        <div class="tool-icon purple">📦</div>
+      <a href="https://esther-ds.vercel.app" target="_blank" class="project-card">
+        <div class="project-icon">🎨</div>
+        <h3>力太阳设计系统</h3>
+        <p>个人品牌设计规范 · 模板库 · 组件库 · 给 AI 用的操作手册</p>
+        <span class="badge">设计</span>
+      </a>
+
+      <a href="https://github.com/sjh2499" target="_blank" class="project-card">
+        <div class="project-icon">📦</div>
         <h3>GitHub</h3>
         <p>开源项目、代码仓库、协作开发</p>
       </a>
 
-      <!-- More coming -->
-      <div class="tool-card">
-        <div class="tool-icon orange">🚧</div>
-        <h3>博客</h3>
-        <p>技术文章、踩坑记录、经验分享</p>
-        <span class="badge">即将上线</span>
+      <div class="project-card">
+        <div class="project-icon">🚧</div>
+        <h3>更多项目</h3>
+        <p>新的工具和项目正在路上…</p>
       </div>
 
-      <div class="tool-card">
-        <div class="tool-icon green">📖</div>
-        <h3>笔记</h3>
-        <p>学习笔记、知识库、速查表</p>
-        <span class="badge">即将上线</span>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-icon red">🎯</div>
-        <h3>项目展示</h3>
-        <p>作品集、Side Projects 一览</p>
-        <span class="badge">即将上线</span>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-icon blue">💡</div>
-        <h3>关于我</h3>
-        <p>联系方式、技能栈、个人介绍</p>
-        <span class="badge">即将上线</span>
-      </div>
-
-    </div>
-
-    <!-- Quick links -->
-    <div class="quick-links">
-      <a href="https://toolbox-nine-navy.vercel.app" class="quick-link" target="_blank">🔧 工具箱</a>
-      <a href="https://github.com/sjh2499" class="quick-link" target="_blank">🐙 GitHub</a>
-      <a href="https://toolbox-nine-navy.vercel.app" class="quick-link" target="_blank">⚡ Vercel 镜像</a>
     </div>
   </div>
+</main>
 
-  <!-- Footer -->
-  <footer>
-    Built with <span class="heart">♥</span> &nbsp;·&nbsp; Powered by <strong>力太阳</strong> &nbsp;·&nbsp; Design System by <a href="https://github.com/esthersjw/esther-design-system" target="_blank" style="color:var(--ink-faint)">ESTHER不二</a>
-  </footer>
+<!-- ==================== TAB: SYSTEM ==================== -->
+<main class="tab-page" id="page-system">
+  <div class="system-page">
+    <h2>🎨 设计系统</h2>
+    <p class="section-desc">基于 ESTHER不二 的设计方法论，定制了我的个人品牌规范</p>
+
+    <div class="system-card">
+      <div class="color-dots">
+        <div class="color-dot blue"></div>
+        <div class="color-dot orange"></div>
+        <div class="color-dot red"></div>
+      </div>
+      <h3>品牌三色</h3>
+      <p>蓝 #0071E3 · 橙 #FF9500 · 红 #FF3B30</p>
+      <a href="https://esther-ds.vercel.app" target="_blank">查看完整设计系统 →</a>
+    </div>
+
+    <div class="system-card">
+      <h3>📖 设计方法论</h3>
+      <p>7步工作流 · 16种布局 · 40+组件 · 质量检查清单 — 把审美写成AI能执行的规则</p>
+      <a href="https://github.com/sjh2499/toolbox/tree/esther-fork" target="_blank">GitHub 源码 →</a>
+    </div>
+  </div>
+</main>
+
+<!-- ==================== PILL NAV ==================== -->
+<nav class="pill-nav" id="pill-nav">
+  <button class="active" onclick="switchTab('home')">🏠 主页</button>
+  <button onclick="switchTab('works')">🛠️ 工具</button>
+  <button onclick="switchTab('system')">🎨 设计</button>
+</nav>
+
+<footer>
+  Built with ♥ · Powered by 力太阳 · Design System by ESTHER不二
+</footer>
+
+<script>
+const pages = { home: 'page-home', works: 'page-works', system: 'page-system' };
+
+function switchTab(name) {
+  // Hide all pages
+  document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+  // Show target
+  const target = document.getElementById(pages[name]);
+  if (target) target.classList.add('active');
+  // Update pill buttons
+  document.querySelectorAll('.pill-nav button').forEach((b, i) => {
+    b.classList.remove('active');
+    if (b.textContent.includes(name === 'home' ? '主页' : name === 'works' ? '工具' : '设计')) {
+      b.classList.add('active');
+    }
+  });
+  // Update hash
+  window.location.hash = name;
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Handle direct hash links (e.g. #works)
+function handleHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (pages[hash]) switchTab(hash);
+}
+window.addEventListener('hashchange', handleHash);
+handleHash();
+</script>
 
 </body>
 </html>
